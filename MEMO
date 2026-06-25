@@ -1,0 +1,20 @@
+
+https://www.solid-ui.com/
+
+
+solid-ui/        official docs
+   pnpm i
+   npm run dev
+
+solid-ui-test1/        error
+
+
+
+solid-ui-test2/ 
+   yarn
+   npm run dev
+
+solid-ui-test3/
+   yarn
+   npm run dev
+
