@@ -9,8 +9,8 @@ import './App.css'
 
 import { Element as Button } from "~/examples/Button"
 import { Element as Accordion } from "~/examples/Accordion"
-import  Post   from "~/examples/Accordion/accordion.mdx"
 
+import Greeting from './Greeting.mdx';
 
 
 function App() {
@@ -18,6 +18,14 @@ function App() {
 
   return (
     <>
+
+    <br/> <h1> MDX  </h1>     
+
+    <div class="p-8">
+      <Greeting name="gusa"/>
+    </div>
+    <br/>
+
     <br/> <h1> Button   </h1>     
 
       <div style={{padding: "30px",width:"800px"}}>

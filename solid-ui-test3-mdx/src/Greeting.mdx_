@@ -1,0 +1,25 @@
+import { createSignal } from 'solid-js';
+
+# Hello from MDX!
+
+export function Counter() {
+  const [count, setCount] = createSignal(1); 
+  const handler = (data, event) => {
+    console.log("handler",count());
+    setCount(count() + 1)
+    console.log(count());
+  }
+
+  return (
+        <button
+          type="button"
+          class="counter"
+	  onClick={[handler]}
+        >
+          Count is ::{count()}
+        </button>
+  );
+}
+
+<Counter />
+

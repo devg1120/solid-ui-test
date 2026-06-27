@@ -1,0 +1,27 @@
+import { createSignal } from 'solid-js';
+import { css } from "solid-styled-components";
+
+import { Counter } from './Counter';
+
+export function Thing() {
+  return <>World</>
+}
+
+# Hello from MDX!
+
+# Hello <Thing />
+
+# Hello {props.name.toUpperCase()}
+
+export const color = "red"
+
+export const c0 = css`width: 600px;border: solid 2px blue`
+
+
+<div class={c0} >
+      <Counter  color="pink"/>
+      <Counter  width="200px" color="lightgreen"/>
+      <Counter  color="lightblue"/>
+      <Counter  color={color}/>
+      <Counter  />
+</div>
