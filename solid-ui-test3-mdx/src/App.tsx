@@ -10,7 +10,9 @@ import './App.css'
 import { Element as Button } from "~/examples/Button"
 import { Element as Accordion } from "~/examples/Accordion"
 
+
 import Greeting from './Greeting.mdx';
+import MDX from "~/examples/Accordion/accordion.mdx"
 
 
 function App() {
@@ -25,7 +27,7 @@ function App() {
       <Greeting name="gusa"/>
     </div>
     <br/>
-
+    
     <br/> <h1> Button   </h1>     
 
       <div style={{padding: "30px",width:"800px"}}>
@@ -36,7 +38,9 @@ function App() {
       <div style={{padding: "30px",width:"300px"}}>
         <Accordion/>
       </div>
-  
+{/*
+    <MDX/>
+*/}
     </>
   )
 }
