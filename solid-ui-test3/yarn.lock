@@ -1333,6 +1333,11 @@ solid-refresh@^0.6.3:
     "@babel/helper-module-imports" "^7.22.15"
     "@babel/types" "^7.23.6"
 
+solidjs-mdx@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/solidjs-mdx/-/solidjs-mdx-1.0.2.tgz#9999403213915ae60df480c769dbcc3bc0d09144"
+  integrity sha512-F5CvLaKOB7QXI8fS7AcXlbSGkM5Woc8lTBxd9EZazpHQgBGNrKT04y8umVGvLAbdRY2QG1yv/7PrhorP1hFNLA==
+
 source-map-js@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
