@@ -1,4 +1,4 @@
-import { MDXProvider } from 'solid-jsx';
+//import { MDXProvider } from 'solid-jsx';
 
 //import  Tweet  from './Tweet.mdx';
 import  { Counter }  from './Counter'; 
@@ -12,7 +12,7 @@ export function Provider() {
 const components = {
        h1: (props) => <h1 style={{ color: 'royalblue' }} {...props} />,
        h2: (props) => <h1 style={{ color: 'red' }} {...props} />,
-       p: (props) => <p style={{ color: "green", "font-size": '40px' }} {...props} />,
+       //p: (props) => <p style={{ color: "green", "font-size": '40px' }} {...props} />,
        Counter,
        Tweet
   }

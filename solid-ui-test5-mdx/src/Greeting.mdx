@@ -1,0 +1,79 @@
+import { createSignal } from 'solid-js';
+import { css } from "solid-styled-components";
+
+{/* import { Counter } from './Counter'; */}
+{/* import  Tweet from './Tweet.mdx'; */}
+
+export function Thing() {
+  return <>World</>
+}
+
+# Hello from MDX!
+
+# Hello <Thing />
+##  h2 Hello <Thing />
+
+P要素テスト
+
+# Hello {props.name.toUpperCase()}
+
+| 赤身 | 白身 | 軍艦 |
+|-----|-----|-----|
+|マグロ|ヒラメ|ウニ|
+|カツオ|タイ|イクラ|
+|トロ|カンパチ|ネギトロ|
+
+
+export const color = "red"
+
+export const c0 = css`width: 600px;border: solid 2px blue`
+
+
+<div class={c0} >
+      <Counter  color="pink"/>
+      <Counter  width="200px" color="lightgreen"/>
+      <Counter  color="lightblue"/>
+      <Counter  color={color}/>
+      <Counter  />
+</div>
+
+
+# Hello, {1 + 1}
+
+{
+  'mdx'.toUpperCase()
+}
+
+
+<Tweet/>
+
+
+# GFM
+
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, nemo!
+
+## Autolink literals
+
+www.example.com, https://example.com, and contact@example.com.
+
+## Footnote
+
+A note[^1]
+
+[^1]: Big note.
+
+## Strikethrough
+
+~one~ or ~~two~~ tildes.
+
+## Table
+
+| a | b  |  c |  d  |
+| - | :- | -: | :-: |
+
+## Tasklist
+
+* [ ] to do
+* [x] done
+
+
