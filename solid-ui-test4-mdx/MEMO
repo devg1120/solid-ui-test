@@ -1,0 +1,41 @@
+
+SolidJS と Vite 環境で MDX (Markdown) を使うには、公式の @mdx-js/rollup と Solid 用の Vite プラグイン vite-plugin-solid を組み合わせて設定します。1. 必要なパッケージのインストール以下のコマンドで、MDX、Vite 用プラグイン、Solid の統合パッケージをインストールします。bashnpm install -D @mdx-js/rollup vite-plugin-solid
+npm install solid-js
+コードは注意してご使用ください。2. vite.config.ts の設定Vite の設定ファイルで、@mdx-js/rollup が Solid の JSX 構文（solid-jsx または solid-js）を生成するように設定します。typescript// vite.config.ts
+import { defineConfig } from 'vite';
+import solid from 'vite-plugin-solid';
+import mdx from '@mdx-js/rollup';
+
+export default defineConfig({
+  plugins: [
+    mdx({
+      jsxImportSource: 'solid-jsx', // または 'solid-js'
+    }),
+    solid(),
+  ],
+  build: {
+    target: 'esnext',
+  },
+});
+コードは注意してご使用ください。3. TypeScript の型定義MDX ファイル（.mdx）を TypeScript でインポートできるように、型定義ファイル（vite-env.d.ts など）に以下の宣言を追加します。typescriptdeclare module '*.mdx' {
+  let MDXComponent: (props: any) => import('solid-js').JSX.Element;
+  export default MDXComponent;
+}
+コードは注意してご使用ください。4. コンポーネントでの使用方法拡張子が .mdx のファイルを作成します。MDX 内で通常の Markdown 記法に加え、Solid のコンポーネントを使用できます。mdx// src/components/Greeting.mdx
+import { createSignal } from 'solid-js';
+
+# Hello from MDX!
+
+MDX 内に直接 SolidJS コンポーネントを書くことも可能です。
+
+export function Counter() {
+  const [count, setCount] = createSignal(0);
+  return (
+    <button onClick={() => setCount(count() + 1)}>
+      Clicks: {count()}
+    </button>
+  );
+}
+
+<Counter />
+
