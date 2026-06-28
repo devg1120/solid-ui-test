@@ -11,8 +11,9 @@ import { Element as Button } from "~/examples/Button"
 import { Element as Accordion } from "~/examples/Accordion"
 
 
-import Greeting from './Greeting.mdx';
+//import Greeting from './Greeting.mdx';
 //import MDX from "~/examples/Accordion/accordion.mdx"
+import  { Provider } from './Provider';
 
 
 function App() {
@@ -22,9 +23,14 @@ function App() {
     <>
 
     <br/> <h1> MDX  </h1>     
-
+{/*
     <div class="p-8">
       <Greeting name="gusa"/>
+    </div>
+    <br/>
+*/}
+    <div class="p-8">
+      <Provider/>
     </div>
     <br/>
     

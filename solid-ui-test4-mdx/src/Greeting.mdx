@@ -1,7 +1,8 @@
 import { createSignal } from 'solid-js';
 import { css } from "solid-styled-components";
 
-import { Counter } from './Counter';
+{/* import { Counter } from './Counter'; */}
+{/* import  Tweet from './Tweet.mdx'; */}
 
 export function Thing() {
   return <>World</>
@@ -10,8 +11,12 @@ export function Thing() {
 # Hello from MDX!
 
 # Hello <Thing />
+##  h2 Hello <Thing />
+
+P要素テスト
 
 # Hello {props.name.toUpperCase()}
+
 
 export const color = "red"
 
@@ -32,4 +37,9 @@ export const c0 = css`width: 600px;border: solid 2px blue`
 {
   'mdx'.toUpperCase()
 }
+
+
+<Tweet/>
+
+
 
