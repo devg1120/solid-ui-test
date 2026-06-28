@@ -23,6 +23,8 @@ function App() {
     <>
 
     <br/> <h1> MDX  </h1>     
+    <hr style="height: 5px; background-color: gray; "/>
+
 {/*
     <div class="p-8">
       <Greeting name="gusa"/>
@@ -32,7 +34,7 @@ function App() {
     <div class="p-8">
       <Provider/>
     </div>
-    <br/>
+    <hr style="height: 5px; background-color: gray; "/>
     
     <br/> <h1> Button   </h1>     
 
