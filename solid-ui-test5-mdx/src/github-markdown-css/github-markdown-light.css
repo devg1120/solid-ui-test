@@ -23,6 +23,38 @@
   text-underline-offset: .2rem;
 }
 
+
+.markdown-body ul {
+  /*list-style-type: disc !important;*/
+  list-style-type: square !important;
+  /*list-style-type: circle !important;*/
+  margin-left: 20px;
+}
+
+
+.markdown-body ol {
+  list-style-type: decimal !important;
+  margin-left: 20px;
+}
+
+.markdown-body ol ol {
+  list-style-type: lower-alpha !important;
+  margin-left: 20px;
+}
+
+.markdown-body ol ol ol{
+  list-style-type: lower-roman !important;
+  margin-left: 20px;
+}
+
+/*
+li { list-style-type: decimal; }
+
+li li { list-style-type: lower-alpha; }
+
+li li li { list-style-type: lower-roman; }
+*/
+
 .markdown-body .octicon {
   display: inline-block;
   fill: currentColor;
@@ -293,10 +325,10 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   outline: none;
 
   /*display: block;*/
-  
+
   position: relative;
   text-align: center;
-  
+
   cursor: pointer;
 
   width: 14px;
@@ -306,9 +338,9 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body input[type='checkbox']::before {
   display: block;
-	
+
   position: absolute;
-  
+
   content: '';
 
   width: 14px;
@@ -326,7 +358,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   display: block;
 
   content: '';
-  
+
   position: absolute;
   left: 4px;
   top: 1px;

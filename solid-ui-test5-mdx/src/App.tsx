@@ -14,6 +14,10 @@ import './App.css'
 import './github-markdown-css/github-markdown-light.css'
 //import './github-markdown-css/github-markdown-light-colorblind.css'
 
+//import './gfm.css/gfm.css'
+//import './gfm-stylesheet/dist/gfm.css'
+
+
 //import { Button } from "~/components/ui/button"
 
 import { Element as Button } from "~/examples/Button"
@@ -52,6 +56,7 @@ function App() {
 {/*
     <Sample1/>
 */}
+
     <div class="markdown-body" style={{padding: "40px"}}>
        <Sample1/>
     </div>
