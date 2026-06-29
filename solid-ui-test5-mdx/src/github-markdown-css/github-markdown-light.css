@@ -47,13 +47,6 @@
   margin-left: 20px;
 }
 
-/*
-li { list-style-type: decimal; }
-
-li li { list-style-type: lower-alpha; }
-
-li li li { list-style-type: lower-roman; }
-*/
 
 .markdown-body .octicon {
   display: inline-block;
