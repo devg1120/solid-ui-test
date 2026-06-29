@@ -10,8 +10,8 @@ import Greeting from './Greeting.mdx';
 export function Provider() {
 
 const components = {
-       h1: (props) => <h1 style={{ color: 'royalblue' }} {...props} />,
-       h2: (props) => <h1 style={{ color: 'red' }} {...props} />,
+       //h1: (props) => <h1 style={{ color: 'royalblue' }} {...props} />,
+       //h2: (props) => <h1 style={{ color: 'red' }} {...props} />,
        //p: (props) => <p style={{ color: "green", "font-size": '40px' }} {...props} />,
        Counter,
        Tweet

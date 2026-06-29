@@ -5,6 +5,15 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+//import './github-markdown-css/github-markdown.css'
+
+//import './github-markdown-css/github-markdown-dark.css'
+//import './github-markdown-css/github-markdown-dark-colorblind.css'
+//import './github-markdown-css/github-markdown-dark-high-contrast.css'
+
+import './github-markdown-css/github-markdown-light.css'
+//import './github-markdown-css/github-markdown-light-colorblind.css'
+
 //import { Button } from "~/components/ui/button"
 
 import { Element as Button } from "~/examples/Button"
@@ -13,7 +22,11 @@ import { Element as Accordion } from "~/examples/Accordion"
 
 //import Greeting from './Greeting.mdx';
 //import MDX from "~/examples/Accordion/accordion.mdx"
+
 import  { Provider } from './Provider';
+import Sample1 from './markdown/sample1.mdx';
+import Sample2 from './markdown/sample2.mdx';
+
 
 
 function App() {
@@ -31,9 +44,19 @@ function App() {
     </div>
     <br/>
 */}
+    {/*
     <div class="p-8">
       <Provider/>
     </div>
+*/}
+{/*
+    <Sample1/>
+*/}
+    <div class="markdown-body" style={{padding: "40px"}}>
+       <Sample1/>
+    </div>
+
+
     <hr style="height: 5px; background-color: gray; "/>
     
     <br/> <h1> Button   </h1>     
