@@ -7,11 +7,11 @@ import './App.css'
 
 //import './github-markdown-css/github-markdown.css'
 
-import './github-markdown-css/github-markdown-dark.css'
+//import './github-markdown-css/github-markdown-dark.css'
 //import './github-markdown-css/github-markdown-dark-colorblind.css'
 //import './github-markdown-css/github-markdown-dark-high-contrast.css'
 
-//import './github-markdown-css/github-markdown-light.css'
+import './github-markdown-css/github-markdown-light.css'
 //import './github-markdown-css/github-markdown-light-colorblind.css'
 
 //import './gfm.css/gfm.css'
