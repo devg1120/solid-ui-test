@@ -6,7 +6,25 @@
 
 D1=solid-ui-test5-mdx/src
 D2=solid-ui-test6-mdx/src
+
 FILE_CNT=0
+FILE_OUTPUT=true
+
+SKIP_MODE=true
+SKIP_NAME=("node_modules"  "dist" "build")
+
+#TARGET_MODE=false
+#TARGET_EXT=("ts"  "tsx" "css")
+TARGET_MODE=true
+TARGET_EXT=( "ts" )
+
+
+for ((i=0; i<${#SKIP_NAME[@]}; i++))
+do
+  echo "\${SKIP_NAME[$i]}=${SKIP_NAME[$i]}"
+done
+
+
 
 walk() {
     local dir="$1"
@@ -16,16 +34,52 @@ walk() {
 
     for item in "$dir"/*; do
 	sub_path=${item##*/}
+
+        if  "${SKIP_MODE}"; then
+	    SKIP=false
+            for ((i=0; i<${#SKIP_NAME[@]}; i++))
+            do
+               if [ $sub_path = ${SKIP_NAME[$i]} ]; then
+	           echo "SKIP $sub_path : $item "
+	           SKIP=true
+	           break
+	       fi
+            done
+            if  "${SKIP}"; then
+                continue
+            fi
+        fi
+
+
         if [ -d "$item" ]; then
             #echo "$indent dir: $item"
             echo "$indent /$sub_path"
             walk  $item  $((level+1))
+
         elif [ -f "$item" ]; then
 	    sub_ext=${item##*.}
             #echo "file: $item"
             #echo "   $sub_ext"
+            if  "${TARGET_MODE}"; then
+	        EXEC=false
+                for ((i=0; i<${#TARGET_EXT[@]}; i++))
+                do
+                   if [ $sub_ext = ${TARGET_EXT[$i]} ]; then
+	               EXEC=true
+	               break
+	           fi
+                done
+                if  "${EXEC}"; then
+                    :
+                else
+                    continue
+                fi
+
+            fi
             FILE_CNT=$((FILE_CNT+1))
-            echo "$indent $sub_path \t\t $FILE_CNT  $sub_ext"
+	    if  "${FILE_OUTPUT}"; then
+             echo "$indent $sub_path \t\t $FILE_CNT  $sub_ext"
+            fi
         fi
     done
 }
