@@ -22,6 +22,7 @@ import './github-markdown-css/github-markdown-light.css'
 
 import { Element as Button } from "~/examples/Button"
 import { Element as Accordion } from "~/examples/Accordion"
+import { LineChartDemo, PieChartDemo, BarChartDemo } from "~/examples/Charts"
 
 
 import Greeting from './Greeting.mdx';
@@ -75,6 +76,14 @@ function App() {
       <div style={{padding: "30px",width:"300px"}}>
         <Accordion/>
       </div>
+
+    <br/> <h1>Charts</h1>
+      <h3>LineChartDemo</h3>
+       <LineChartDemo/>
+      <h3>PieChartDemo</h3>
+       <PieChartDemo/>
+      <h3>BarChartDemo</h3>
+       <BarChartDemo/>
 {/*
     <MDX/>
 */}
