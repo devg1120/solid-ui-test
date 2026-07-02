@@ -109,8 +109,8 @@
   font-weight: 600;
   padding-bottom: .3em;
   font-size: 2em;
-  border-bottom: 1px solid #d1d9e0b3;
-  border-bottom: 1px solid red; /*GS*/
+  border-bottom: 3px solid #d1d9e0b3;
+  border-bottom: 3px solid #b0c4de;
 }
 
 .markdown-body mark {
@@ -165,7 +165,6 @@
   padding: 0;
   margin: 1.5rem 0;
   background-color: #d1d9e0;
-  background-color: orange; /*GS*/
   border: 0;
 }
 
@@ -324,7 +323,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
   cursor: pointer;
 
-  width: 14px;
+  width: 30px;  /* RIGHT SPACE */
   height: 14px;
   margin: 0 auto;
 }
@@ -340,11 +339,13 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   height: 14px;
   background: #fff;
   border: solid 1px #01a2c1;
+  border: solid 1px gray;
   border-radius: 1px;
 }
 
 .markdown-body input[type='checkbox']:checked::before {
   background-color: #01a2c1;
+  background-color: gray;
 }
 
 .markdown-body input[type='checkbox']::after {
@@ -401,7 +402,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   padding-bottom: .3em;
   font-size: 1.5em;
   border-bottom: 1px solid #d1d9e0b3;
-  border-bottom: 1px solid blue;  /*GS*/
+  border-bottom: 1px solid #b0c4de;  /*GS*/
 }
 
 .markdown-body h3 {
@@ -435,7 +436,6 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   padding: 0 1em;
   color: #59636e;
   border-left: .25em solid #d1d9e0;
-  border-left: .25em solid lightgreen; /*GS*/
 }
 
 .markdown-body ul,
@@ -691,8 +691,8 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 .markdown-body table th,
 .markdown-body table td {
   padding: 6px 13px;
-  border: 1px solid #d1d9e0;
-  border: 1px solid red;  /*GS*/
+  border: 2px solid #d1d9e0;
+  border: 1px solid #000000;
 }
 
 .markdown-body table td>:last-child {
@@ -705,8 +705,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #f6f8fa;
-  background-color: lightblue;   /*GS*/
+  background-color: #E6E6FA;
 }
 
 .markdown-body table img {
@@ -869,6 +868,9 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   color: #1f2328;
   background-color: #f6f8fa;
   background-color: #33314B; /*GS*/
+  background-color: #233B6C; /*GS*/
+  /*background-color: #4169E1; /*GS*/
+  background-color: ; /*GS*/
   color: #ffffff;/*GS*/
   border-radius: 6px;
 }
@@ -1125,7 +1127,8 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body .task-list-item {
   list-style-type: none;
-  color: green; /*GS*/
+  color: #233B6C; /*GS*/
+  color: black; /*GS*/
 }
 
 .markdown-body .task-list-item label {

@@ -11,7 +11,7 @@ import './App.css'
 //import './github-markdown-css/github-markdown-dark-colorblind.css'
 //import './github-markdown-css/github-markdown-dark-high-contrast.css'
 
-import './github-markdown-css/github-markdown-light.css'  /* GS CUSTUN */
+//import './github-markdown-css/github-markdown-light.css'  /* GS CUSTUN */
 //import './github-markdown-css/github-markdown-light-colorblind.css'
 
 //import './gfm.css/gfm.css'
@@ -27,8 +27,8 @@ import './github-markdown-css/github-markdown-light.css'  /* GS CUSTUN */
 //import './css/markdown-css-themes/markdown6.css'    /*GOOD*/
 //import './css/markdown-css-themes/markdown7.css'      /*GOOD  table*/
 //import './css/markdown-css-themes/markdown8.css'
-//import './css/markdown-css-themes/markdown9.css'
-//import './css/markdown-css-themes/markdown10.css'    /*GOOD*/
+import './css/markdown-css-themes/markdown9.css'
+//import './css/markdown-css-themes/markdown10.css'
 
 
 //import { Button } from "~/components/ui/button"
