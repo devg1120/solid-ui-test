@@ -56,7 +56,10 @@ function App() {
     <>
 
     <div class="markdown-body" style={{padding: "40px"}}>
-       <Full/>
+     <h1>🔷 Sample1</h1>
+       <Sample1/>
+     <h1>🔷 Sample2</h1>
+       <Sample2/>
     </div>
 
 
