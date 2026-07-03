@@ -8,6 +8,9 @@ import { Card } from "~/components/ui/card"
 import { Flex } from "~/components/ui/flex"
 import { LineChartDemo, PieChartDemo, BarChartDemo } from "~/examples/Charts"
 import { CardDemo } from "~/examples/Card"
+import { ResizableDemo } from "~/examples/Resizable"
+import { TableDemo } from "~/examples/Table"
+import { TabsDemo } from "~/examples/Tabs"
 
 
 export function Thing() {
@@ -18,12 +21,14 @@ export function Thing() {
 
 # Hello from MDX!
 
-<h1>Greeting</h1>
+<h1>Greeting.mdx</h1>
 </div>
 
     <br/> <h1>Card</h1>
        <CardDemo/>
 
+    <br/> <h1>Resizable</h1>
+       <ResizableDemo/>
 
     <h3>BarChartDemo</h3>
        <BarChartDemo/>
@@ -50,6 +55,19 @@ export function Thing() {
        <LineChartDemo/>
     </div>
   </Flex>
+
+  <Flex>
+    <div>
+       <TableDemo/>
+    </div>
+    <div>
+       <ResizableDemo/>
+    </div>
+    <div>
+       <TabsDemo/>
+    </div>
+  </Flex>
+
 # Hello <Thing />
 ##  h2 Hello <Thing />
 
