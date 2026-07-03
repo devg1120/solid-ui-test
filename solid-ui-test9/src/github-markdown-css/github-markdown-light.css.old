@@ -1,9 +1,4 @@
 /*light */
-
-/*
- *  base color #233B6C
-*/
- 
 .markdown-body {
   color-scheme: light;
   /** CSS default easing. Use for hover state changes and micro-interactions. */
@@ -34,7 +29,6 @@
   list-style-type: square !important;
   /*list-style-type: circle !important;*/
   margin-left: 20px;
-  color: #233B6C;
 }
 
 
@@ -92,7 +86,6 @@
 .markdown-body a {
   background-color: rgba(0,0,0,0);
   color: #0969da;
-  color: #233B6C;
   text-decoration: none;
 }
 
@@ -111,7 +104,6 @@
   font-style: italic;
 }
 
-/*
 .markdown-body h1 {
   margin: .67em 0;
   font-weight: 600;
@@ -120,7 +112,7 @@
   border-bottom: 3px solid #d1d9e0b3;
   border-bottom: 3px solid #b0c4de;
 }
-*/
+
 .markdown-body mark {
   background-color: #fff8c5;
   color: #1f2328;
@@ -169,12 +161,10 @@
   overflow: hidden;
   background: rgba(0,0,0,0);
   border-bottom: 1px solid #d1d9e0b3;
-  border-bottom: 1px solid  #233B6C;
   height: .25em;
   padding: 0;
   margin: 1.5rem 0;
   background-color: #d1d9e0;
-  background-color: #233B6C;
   border: 0;
 }
 
@@ -333,7 +323,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
   cursor: pointer;
 
-  width: 20px;  /* RIGHT SPACE */
+  width: 30px;  /* RIGHT SPACE */
   height: 14px;
   margin: 0 auto;
 }
@@ -349,13 +339,13 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   height: 14px;
   background: #fff;
   border: solid 1px #01a2c1;
-  border: solid 1px #233B6C;
+  border: solid 1px gray;
   border-radius: 1px;
 }
 
 .markdown-body input[type='checkbox']:checked::before {
   background-color: #01a2c1;
-  background-color: #233B6C;
+  background-color: gray;
 }
 
 .markdown-body input[type='checkbox']::after {
@@ -407,22 +397,12 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   line-height: 1.25;
 }
 
-.markdown-body h1 {
-  margin: .67em 0;
-  font-weight: 600;
-  padding-bottom: .3em;
-  font-size: 2em;
-  border-bottom: 3px solid #d1d9e0b3;
-  border-bottom: 3px solid #b0c4de;
-  border-bottom: 20px solid  #233B6C;  /*GS*/
-}
 .markdown-body h2 {
   font-weight: 600;
   padding-bottom: .3em;
   font-size: 1.5em;
   border-bottom: 1px solid #d1d9e0b3;
-  border-bottom: 10px solid #b0c4de;  /*GS*/
-  border-bottom: 10px solid  #233B6C;  /*GS*/
+  border-bottom: 1px solid #b0c4de;  /*GS*/
 }
 
 .markdown-body h3 {
@@ -453,10 +433,9 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body blockquote {
   margin: 0;
-  padding: 0 0.7em;
+  padding: 0 1em;
   color: #59636e;
   border-left: .25em solid #d1d9e0;
-  border-left: .6em solid #233B6Cc0;
 }
 
 .markdown-body ul,
@@ -726,7 +705,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #233B6C20;
+  background-color: #E6E6FA;
 }
 
 .markdown-body table img {
@@ -891,6 +870,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   background-color: #33314B; /*GS*/
   background-color: #233B6C; /*GS*/
   /*background-color: #4169E1; /*GS*/
+  background-color: ; /*GS*/
   color: #ffffff;/*GS*/
   border-radius: 6px;
 }

@@ -1,11 +1,6 @@
-/*light */
-
-/*
- *  base color #233B6C
-*/
- 
+/*dark_colorblind */
 .markdown-body {
-  color-scheme: light;
+  color-scheme: dark;
   /** CSS default easing. Use for hover state changes and micro-interactions. */
   /** Accelerating motion. Use for elements exiting the viewport (moving off-screen). */
   /** Smooth acceleration and deceleration. Use for elements moving or morphing within the viewport. */
@@ -15,8 +10,8 @@
   -webkit-text-size-adjust: 100%;
   margin: 0;
   font-weight: 400;
-  color: #1f2328;
-  background-color: #ffffff;
+  color: #f0f6fc;
+  background-color: #0d1117;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 16px;
   line-height: 1.5;
@@ -27,32 +22,6 @@
   text-decoration: underline;
   text-underline-offset: .2rem;
 }
-
-
-.markdown-body ul {
-  /*list-style-type: disc !important;*/
-  list-style-type: square !important;
-  /*list-style-type: circle !important;*/
-  margin-left: 20px;
-  color: #233B6C;
-}
-
-
-.markdown-body ol {
-  list-style-type: decimal !important;
-  margin-left: 20px;
-}
-
-.markdown-body ol ol {
-  list-style-type: lower-alpha !important;
-  margin-left: 20px;
-}
-
-.markdown-body ol ol ol{
-  list-style-type: lower-roman !important;
-  margin-left: 20px;
-}
-
 
 .markdown-body .octicon {
   display: inline-block;
@@ -91,8 +60,7 @@
 
 .markdown-body a {
   background-color: rgba(0,0,0,0);
-  color: #0969da;
-  color: #233B6C;
+  color: #4493f8;
   text-decoration: none;
 }
 
@@ -111,19 +79,17 @@
   font-style: italic;
 }
 
-/*
 .markdown-body h1 {
   margin: .67em 0;
   font-weight: 600;
   padding-bottom: .3em;
   font-size: 2em;
-  border-bottom: 3px solid #d1d9e0b3;
-  border-bottom: 3px solid #b0c4de;
+  border-bottom: 1px solid #3d444db3;
 }
-*/
+
 .markdown-body mark {
-  background-color: #fff8c5;
-  color: #1f2328;
+  background-color: #bb800926;
+  color: #f0f6fc;
 }
 
 .markdown-body small {
@@ -168,13 +134,11 @@
   box-sizing: content-box;
   overflow: hidden;
   background: rgba(0,0,0,0);
-  border-bottom: 1px solid #d1d9e0b3;
-  border-bottom: 1px solid  #233B6C;
+  border-bottom: 1px solid #3d444db3;
   height: .25em;
   padding: 0;
   margin: 1.5rem 0;
-  background-color: #d1d9e0;
-  background-color: #233B6C;
+  background-color: #3d444d;
   border: 0;
 }
 
@@ -227,7 +191,7 @@
 }
 
 .markdown-body ::placeholder {
-  color: #59636e;
+  color: #9198a1;
   opacity: 1;
 }
 
@@ -295,100 +259,14 @@
   outline-offset: 0;
 }
 
-/*
-
-.markdown-body input[type=checkbox] {
-  appearance: none;
-  -webkit-appearance: none;
-
-  width: 10px;
-  height: 10px;
-
-  border: 2px solid #999;
-  border-radius: 2px;
-
-  cursor: pointer;
-  outline: none;
-}
-
-.markdown-body input[type=checkbox]:checked {
-  background-color: #007bff;
-  border-color: #007bff;
-
-}
-*/
-
-/*
-https://qiita.com/pe-ta/items/74822fd9fce24848d97e
-*/
-
-.markdown-body input[type='checkbox'] {
-  appearance: none;
-  outline: none;
-
-  /*display: block;*/
-
-  position: relative;
-  text-align: center;
-
-  cursor: pointer;
-
-  width: 20px;  /* RIGHT SPACE */
-  height: 14px;
-  margin: 0 auto;
-}
-
-.markdown-body input[type='checkbox']::before {
-  display: block;
-
-  position: absolute;
-
-  content: '';
-
-  width: 14px;
-  height: 14px;
-  background: #fff;
-  border: solid 1px #01a2c1;
-  border: solid 1px #233B6C;
-  border-radius: 1px;
-}
-
-.markdown-body input[type='checkbox']:checked::before {
-  background-color: #01a2c1;
-  background-color: #233B6C;
-}
-
-.markdown-body input[type='checkbox']::after {
-  display: block;
-
-  content: '';
-
-  position: absolute;
-  left: 4px;
-  top: 1px;
-
-  width: 6px;
-  height: 10px;
-  border-right: 3px solid #fff;
-  border-bottom: 3px solid #fff;
-  transform: rotate(45deg);
-
-  opacity: 0;
-}
-
-.markdown-body input[type='checkbox']:checked::after {
-  opacity: 1;
-}
-
-
 .markdown-body kbd {
   display: inline-block;
   padding: 0.25rem;
   font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   line-height: 10px;
-  color: #1f2328;
+  color: #f0f6fc;
   vertical-align: middle;
-  background-color: #f6f8fa;
+  background-color: #151b23;
   border: solid 1px var(--borderColor-muted);
   border-bottom-color: var(--borderColor-muted);
   border-radius: 6px;
@@ -407,22 +285,11 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   line-height: 1.25;
 }
 
-.markdown-body h1 {
-  margin: .67em 0;
-  font-weight: 600;
-  padding-bottom: .3em;
-  font-size: 2em;
-  border-bottom: 3px solid #d1d9e0b3;
-  border-bottom: 3px solid #b0c4de;
-  border-bottom: 20px solid  #233B6C;  /*GS*/
-}
 .markdown-body h2 {
   font-weight: 600;
   padding-bottom: .3em;
   font-size: 1.5em;
-  border-bottom: 1px solid #d1d9e0b3;
-  border-bottom: 10px solid #b0c4de;  /*GS*/
-  border-bottom: 10px solid  #233B6C;  /*GS*/
+  border-bottom: 1px solid #3d444db3;
 }
 
 .markdown-body h3 {
@@ -443,7 +310,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 .markdown-body h6 {
   font-weight: 600;
   font-size: .85em;
-  color: #59636e;
+  color: #9198a1;
 }
 
 .markdown-body p {
@@ -453,10 +320,9 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body blockquote {
   margin: 0;
-  padding: 0 0.7em;
-  color: #59636e;
-  border-left: .25em solid #d1d9e0;
-  border-left: .6em solid #233B6Cc0;
+  padding: 0 1em;
+  color: #9198a1;
+  border-left: .25em solid #3d444d;
 }
 
 .markdown-body ul,
@@ -539,7 +405,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body .absent {
-  color: #d1242f;
+  color: #f0883e;
 }
 
 .markdown-body .anchor {
@@ -579,7 +445,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 .markdown-body h4 .octicon-link,
 .markdown-body h5 .octicon-link,
 .markdown-body h6 .octicon-link {
-  color: #1f2328;
+  color: #f0f6fc;
   vertical-align: middle;
   visibility: hidden;
 }
@@ -712,8 +578,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 .markdown-body table th,
 .markdown-body table td {
   padding: 6px 13px;
-  border: 2px solid #d1d9e0;
-  border: 1px solid #000000;
+  border: 1px solid #3d444d;
 }
 
 .markdown-body table td>:last-child {
@@ -721,12 +586,12 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body table tr {
-  background-color: #ffffff;
-  border-top: 1px solid #d1d9e0b3;
+  background-color: #0d1117;
+  border-top: 1px solid #3d444db3;
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #233B6C20;
+  background-color: #151b23;
 }
 
 .markdown-body table img {
@@ -759,7 +624,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   padding: 7px;
   margin: 13px 0 0;
   overflow: hidden;
-  border: 1px solid #d1d9e0;
+  border: 1px solid #3d444d;
 }
 
 .markdown-body span.frame span img {
@@ -771,7 +636,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   display: block;
   padding: 5px 0 0;
   clear: both;
-  color: #1f2328;
+  color: #f0f6fc;
 }
 
 .markdown-body span.align-center {
@@ -841,7 +706,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   margin: 0;
   font-size: 85%;
   white-space: break-spaces;
-  background-color: #818b981f;
+  background-color: #656c7633;
   border-radius: 6px;
 }
 
@@ -886,12 +751,8 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  color: #1f2328;
-  background-color: #f6f8fa;
-  background-color: #33314B; /*GS*/
-  background-color: #233B6C; /*GS*/
-  /*background-color: #4169E1; /*GS*/
-  color: #ffffff;/*GS*/
+  color: #f0f6fc;
+  background-color: #151b23;
   border-radius: 6px;
 }
 
@@ -920,7 +781,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 .markdown-body .csv-data .blob-num {
   padding: 10px 0.5rem 9px;
   text-align: right;
-  background: #ffffff;
+  background: #0d1117;
   border: 0;
 }
 
@@ -930,7 +791,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body .csv-data th {
   font-weight: 600;
-  background: #f6f8fa;
+  background: #151b23;
   border-top: 0;
 }
 
@@ -944,8 +805,8 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body .footnotes {
   font-size: 12px;
-  color: #59636e;
-  border-top: 1px solid #d1d9e0;
+  color: #9198a1;
+  border-top: 1px solid #3d444d;
 }
 
 .markdown-body .footnotes ol {
@@ -970,12 +831,12 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   left: calc(1.5rem*-1);
   pointer-events: none;
   content: "";
-  border: 2px solid #0969da;
+  border: 2px solid #1f6feb;
   border-radius: 6px;
 }
 
 .markdown-body .footnotes li:target {
-  color: #1f2328;
+  color: #f0f6fc;
 }
 
 .markdown-body .footnotes .data-footnote-backref g-emoji {
@@ -983,30 +844,30 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body .pl-c {
-  color: #59636e;
+  color: #9198a1;
 }
 
 .markdown-body .pl-c1,
 .markdown-body .pl-s .pl-v {
-  color: #0550ae;
+  color: #79c0ff;
 }
 
 .markdown-body .pl-e,
 .markdown-body .pl-en {
-  color: #6639ba;
+  color: #d2a8ff;
 }
 
 .markdown-body .pl-smi,
 .markdown-body .pl-s .pl-s1 {
-  color: #1f2328;
+  color: #f0f6fc;
 }
 
 .markdown-body .pl-ent {
-  color: #0550ae;
+  color: #a5d6ff;
 }
 
 .markdown-body .pl-k {
-  color: #cf222e;
+  color: #f0883e;
 }
 
 .markdown-body .pl-s,
@@ -1016,16 +877,16 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 .markdown-body .pl-sr .pl-cce,
 .markdown-body .pl-sr .pl-sre,
 .markdown-body .pl-sr .pl-sra {
-  color: #0a3069;
+  color: #a5d6ff;
 }
 
 .markdown-body .pl-v,
 .markdown-body .pl-smw {
-  color: #953800;
+  color: #ffa657;
 }
 
 .markdown-body .pl-bu {
-  color: #82071e;
+  color: #db6d28;
 }
 
 .markdown-body .pl-ii {
@@ -1034,72 +895,72 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body .pl-c2 {
-  color: #f6f8fa;
-  background-color: #cf222e;
+  color: #f0f6fc;
+  background-color: #9b4215;
 }
 
 .markdown-body .pl-sr .pl-cce {
   font-weight: bold;
-  color: #116329;
+  color: #a5d6ff;
 }
 
 .markdown-body .pl-ml {
-  color: #3b2300;
+  color: #f2cc60;
 }
 
 .markdown-body .pl-mh,
 .markdown-body .pl-mh .pl-en,
 .markdown-body .pl-ms {
   font-weight: bold;
-  color: #0550ae;
+  color: #1f6feb;
 }
 
 .markdown-body .pl-mi {
   font-style: italic;
-  color: #1f2328;
+  color: #f0f6fc;
 }
 
 .markdown-body .pl-mb {
   font-weight: bold;
-  color: #1f2328;
+  color: #f0f6fc;
 }
 
 .markdown-body .pl-md {
-  color: #82071e;
-  background-color: #ffebe9;
+  color: #ffdfb6;
+  background-color: #5a1e02;
 }
 
 .markdown-body .pl-mi1 {
-  color: #116329;
-  background-color: #dafbe1;
+  color: #cae8ff;
+  background-color: #0c2d6b;
 }
 
 .markdown-body .pl-mc {
-  color: #953800;
-  background-color: #ffd8b5;
+  color: #ffdfb6;
+  background-color: #5a1e02;
 }
 
 .markdown-body .pl-mi2 {
-  color: #d1d9e0;
-  background-color: #0550ae;
+  color: #f0f6fc;
+  background-color: #1158c7;
 }
 
 .markdown-body .pl-mdr {
   font-weight: bold;
-  color: #8250df;
+  color: #d2a8ff;
 }
 
 .markdown-body .pl-ba {
-  color: #59636e;
+  color: #9198a1;
 }
 
 .markdown-body .pl-sg {
-  color: #818b98;
+  color: #3d444d;
 }
 
 .markdown-body .pl-corl {
   text-decoration: underline;
-  color: #0a3069;
+  color: #a5d6ff;
 }
 
 .markdown-body [role=button]:focus:not(:focus-visible),
@@ -1147,8 +1008,6 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 
 .markdown-body .task-list-item {
   list-style-type: none;
-  color: #233B6C; /*GS*/
-  color: black; /*GS*/
 }
 
 .markdown-body .task-list-item label {
@@ -1197,7 +1056,7 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   color: inherit;
-  border-left: .25em solid #d1d9e0;
+  border-left: .25em solid #3d444d;
 }
 
 .markdown-body .markdown-alert>:first-child {
@@ -1216,43 +1075,43 @@ https://qiita.com/pe-ta/items/74822fd9fce24848d97e
 }
 
 .markdown-body .markdown-alert.markdown-alert-note {
-  border-left-color: #0969da;
+  border-left-color: #1f6feb;
 }
 
 .markdown-body .markdown-alert.markdown-alert-note .markdown-alert-title {
-  color: #0969da;
+  color: #4493f8;
 }
 
 .markdown-body .markdown-alert.markdown-alert-important {
-  border-left-color: #8250df;
+  border-left-color: #8957e5;
 }
 
 .markdown-body .markdown-alert.markdown-alert-important .markdown-alert-title {
-  color: #8250df;
+  color: #ab7df8;
 }
 
 .markdown-body .markdown-alert.markdown-alert-warning {
-  border-left-color: #9a6700;
+  border-left-color: #9e6a03;
 }
 
 .markdown-body .markdown-alert.markdown-alert-warning .markdown-alert-title {
-  color: #9a6700;
+  color: #d29922;
 }
 
 .markdown-body .markdown-alert.markdown-alert-tip {
-  border-left-color: #1a7f37;
+  border-left-color: #1f6feb;
 }
 
 .markdown-body .markdown-alert.markdown-alert-tip .markdown-alert-title {
-  color: #1a7f37;
+  color: #58a6ff;
 }
 
 .markdown-body .markdown-alert.markdown-alert-caution {
-  border-left-color: #cf222e;
+  border-left-color: #bd561d;
 }
 
 .markdown-body .markdown-alert.markdown-alert-caution .markdown-alert-title {
-  color: #d1242f;
+  color: #f0883e;
 }
 
 .markdown-body>*:first-child>.heading-element:first-child {

@@ -1,0 +1,120 @@
+import { createSignal } from 'solid-js';
+import { css } from "solid-styled-components";
+
+{/* import { Counter } from './Counter'; */}
+{/* import  Tweet from './Tweet.mdx'; */}
+
+import { Card } from "~/components/ui/card"
+import { Flex } from "~/components/ui/flex"
+import { LineChartDemo, PieChartDemo, BarChartDemo } from "~/examples/Charts"
+import { CardDemo } from "~/examples/Card"
+
+
+export function Thing() {
+  return <>World</>
+}
+
+<div class="markdown-body" style={{padding: "40px"}}>
+
+# Hello from MDX!
+
+<h1>Greeting</h1>
+</div>
+
+    <br/> <h1>Card</h1>
+       <CardDemo/>
+
+
+    <h3>BarChartDemo</h3>
+       <BarChartDemo/>
+
+  <Flex>
+    <div>
+      <p class="text-sm font-normal text-gray-500">Tickets sold</p>
+      <p class="text-3xl font-semibold text-gray-700">9,876</p>
+    </div>
+    <div>
+      <p class="text-sm font-normal text-gray-500">Average Selling Price</p>
+      <p class="text-3xl font-semibold text-gray-700">$ 175.20</p>
+    </div>
+  </Flex>
+
+  <Flex>
+    <div>
+       <BarChartDemo/>
+    </div>
+    <div>
+       <PieChartDemo/>
+    </div>
+    <div>
+       <LineChartDemo/>
+    </div>
+  </Flex>
+# Hello <Thing />
+##  h2 Hello <Thing />
+
+P要素テスト
+
+# Hello {props.name.toUpperCase()}
+
+| 赤身 | 白身 | 軍艦 |
+|-----|-----|-----|
+|マグロ|ヒラメ|ウニ|
+|カツオ|タイ|イクラ|
+|トロ|カンパチ|ネギトロ|
+
+
+export const color = "red"
+
+export const c0 = css`width: 600px;border: solid 2px blue`
+
+
+<div class={c0} >
+      <Counter  color="pink"/>
+      <Counter  width="200px" color="lightgreen"/>
+      <Counter  color="lightblue"/>
+      <Counter  color={color}/>
+      <Counter  />
+</div>
+
+
+# Hello, {1 + 1}
+
+{
+  'mdx'.toUpperCase()
+}
+
+
+<Tweet/>
+<Counter/>
+
+
+# GFM
+
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, nemo!
+
+## Autolink literals
+
+www.example.com, https://example.com, and contact@example.com.
+
+## Footnote
+
+A note[^1]
+
+[^1]: Big note.
+
+## Strikethrough
+
+~one~ or ~~two~~ tildes.
+
+## Table
+
+| a | b  |  c |  d  |
+| - | :- | -: | :-: |
+
+## Tasklist
+
+* [ ] to do
+* [x] done
+
+
