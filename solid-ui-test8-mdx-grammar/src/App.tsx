@@ -11,10 +11,10 @@ import './App.css'
 //import './github-markdown-css/github-markdown-dark-colorblind.css'
 //import './github-markdown-css/github-markdown-dark-high-contrast.css'
 
-import './github-markdown-css/github-markdown-light.css'  /* GS CUSTUN */
+//import './github-markdown-css/github-markdown-light.css'  /* GS CUSTUN */
 //import './github-markdown-css/github-markdown-light-colorblind.css'
 
-//import './gfm.css/gfm.css'
+import './gfm.css/gfm.css'
 //import './gfm-stylesheet/dist/gfm.css'
 
 //import './css/Markdown-CSS/markdown.css'
