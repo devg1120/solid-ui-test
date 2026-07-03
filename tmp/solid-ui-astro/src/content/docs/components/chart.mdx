@@ -1,0 +1,559 @@
+---
+title: Chart
+description: Beautiful charts. Built using solid-charts. Copy and paste into your apps.
+component: true
+---
+
+<ComponentPreview name="chart-demo" previewClassName="h-auto p-0" hideCode />
+
+Introducing **Charts**. A collection of chart components that you can copy and paste into your apps.
+
+Charts are designed to look great out of the box. They work well with the other components and are fully customizable to fit your project.
+
+## Composition
+
+We use [solid-charts](https://solidcharts.dev/) under the hood.
+
+We designed the `chart` component with composition in mind. **You build your charts using `solid-charts` primitives and only bring in custom components, such as `ChartTooltip`, when and where you need them**.
+
+```text
+ChartContainer
+├── Axis
+│   ├── AxisLabel
+│   └── ChartTooltip
+│       └── ChartTooltipContent
+└── Bar / Line / Area / other solid-charts primitives
+```
+
+```tsx showLineNumbers /ChartContainer/ /ChartTooltipContent/
+import { Axis, AxisLabel, Bar } from "solid-charts"
+
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "~/components/ui/chart"
+
+export function MyChart() {
+  return (
+    <ChartContainer config={chartConfig} data={data} class="min-h-[200px] w-full">
+      <Axis axis="y" position="left">
+        <AxisLabel />
+      </Axis>
+      <Axis axis="x" dataKey="month" position="bottom">
+        <AxisLabel />
+        <ChartTooltip>
+          {({ data }) => <ChartTooltipContent data={data} labelKey="month" />}
+        </ChartTooltip>
+      </Axis>
+      <Bar dataKey="value" fill="var(--color-value)" />
+    </ChartContainer>
+  )
+}
+```
+
+We keep the wrapper thin. This means you're not locked into a chart-specific abstraction, and you can keep following the `solid-charts` API as it evolves.
+
+**The components are yours**.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add chart
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependency:</Step>
+
+```bash
+npm install solid-charts
+```
+
+<Step>Copy and paste the following code into `components/ui/chart.tsx`.</Step>
+
+<ComponentSource name="chart" title="components/ui/chart.tsx" />
+
+<Step>Add the following colors to your CSS file</Step>
+
+```css title="src/styles/globals.css" showLineNumbers
+@layer base {
+  :root {
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+  }
+
+  .dark {
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+  }
+}
+```
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Your First Chart
+
+Let's build your first chart. We'll build a bar chart, add a grid, axis, tooltip and legend.
+
+<Steps>
+
+<Step>Start by defining your data</Step>
+
+The following data represents the number of desktop and mobile users for each month.
+
+<Callout class="mt-4">
+
+**Note:** Your data can be in any shape. You are not limited to the shape of the data below. Use the `dataKey` prop to map your data to the chart.
+
+</Callout>
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 }
+]
+```
+
+<Step>Define your chart config</Step>
+
+The chart config holds configuration for the chart. This is where you place human-readable strings, such as labels, icons and color tokens for theming.
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+import { type ChartConfig } from "~/components/ui/chart"
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "#2563eb"
+  },
+  mobile: {
+    label: "Mobile",
+    color: "#60a5fa"
+  }
+} satisfies ChartConfig
+```
+
+<Step>Build your chart</Step>
+
+You can now build your chart using `solid-charts` components.
+
+We'll start with the bars and layer on the rest.
+
+<Callout class="mt-4 bg-amber-50 border-amber-200 dark:bg-amber-950/50 dark:border-amber-950">
+
+**Important:** Remember to set a `min-h-[VALUE]`, `h-[VALUE]`, or `aspect-*` class on the `ChartContainer` component. This is required for the chart to be responsive.
+
+</Callout>
+
+<ComponentPreview name="chart-example" previewClassName="h-80" />
+
+</Steps>
+
+### Add a Grid
+
+Let's add a grid to the chart.
+
+<Steps class="mb-0 pt-2">
+
+<Step>Import the `AxisGrid` component.</Step>
+
+```tsx /AxisGrid/
+import { AxisGrid } from "solid-charts"
+```
+
+<Step>Add the `AxisGrid` component to your chart.</Step>
+
+```tsx showLineNumbers {2-4}
+<ChartContainer config={chartConfig} data={chartData} class="min-h-[200px] w-full">
+  <Axis axis="y" position="left" tickCount={5}>
+    <AxisGrid />
+  </Axis>
+  <Bar dataKey="desktop" fill="var(--color-desktop)" rx="4" ry="4" />
+  <Bar dataKey="mobile" fill="var(--color-mobile)" rx="4" ry="4" />
+</ChartContainer>
+```
+
+<ComponentPreview name="chart-example-grid" previewClassName="h-80" />
+
+</Steps>
+
+### Add an Axis
+
+To add an x-axis to the chart, we'll use the `AxisLabel` component.
+
+<Steps class="mb-0 pt-2">
+
+<Step>Import the `AxisLabel` component.</Step>
+
+```tsx /AxisLabel/
+import { AxisLabel } from "solid-charts"
+```
+
+<Step>Add the `AxisLabel` component to your chart.</Step>
+
+```tsx showLineNumbers {5-7}
+<ChartContainer config={chartConfig} data={chartData} class="min-h-[200px] w-full">
+  <Axis axis="y" position="left" tickCount={5}>
+    <AxisGrid />
+  </Axis>
+  <Axis axis="x" dataKey="month" position="bottom">
+    <AxisLabel format={(value) => String(value).slice(0, 3)} />
+  </Axis>
+  <Bar dataKey="desktop" fill="var(--color-desktop)" rx="4" ry="4" />
+  <Bar dataKey="mobile" fill="var(--color-mobile)" rx="4" ry="4" />
+</ChartContainer>
+```
+
+<ComponentPreview name="chart-example-axis" previewClassName="h-80" />
+
+</Steps>
+
+### Add Tooltip
+
+So far we've only used components from `solid-charts`. They look great out of the box thanks to some customization in the `chart` component.
+
+To add a tooltip, we'll use the custom `ChartTooltip` and `ChartTooltipContent` components from `chart`.
+
+<Steps class="mb-0 pt-2">
+
+<Step>Import the `ChartTooltip` and `ChartTooltipContent` components.</Step>
+
+```tsx
+import { ChartTooltip, ChartTooltipContent } from "~/components/ui/chart"
+```
+
+<Step>Add the components to your chart.</Step>
+
+```tsx showLineNumbers {7-9}
+<ChartContainer config={chartConfig} data={chartData} class="min-h-[200px] w-full">
+  <Axis axis="y" position="left" tickCount={5}>
+    <AxisGrid />
+  </Axis>
+  <Axis axis="x" dataKey="month" position="bottom">
+    <AxisLabel format={(value) => String(value).slice(0, 3)} />
+    <ChartTooltip>
+      {({ data }) => <ChartTooltipContent data={data} labelKey="month" />}
+    </ChartTooltip>
+  </Axis>
+  <Bar dataKey="desktop" fill="var(--color-desktop)" rx="4" ry="4" />
+  <Bar dataKey="mobile" fill="var(--color-mobile)" rx="4" ry="4" />
+</ChartContainer>
+```
+
+<ComponentPreview name="chart-example-tooltip" previewClassName="h-80" />
+
+Hover to see the tooltips. Easy, right? Two components, and we've got a beautiful tooltip.
+
+</Steps>
+
+### Add Legend
+
+We'll do the same for the legend. We'll use the `ChartLegend` and `ChartLegendContent` components from `chart`.
+
+Because the Solid legend renders next to `ChartContainer`, pass `config` when `ChartLegendContent` is rendered outside the chart.
+
+<Steps class="mb-0 pt-2">
+
+<Step>Import the `ChartLegend` and `ChartLegendContent` components.</Step>
+
+```tsx
+import { ChartLegend, ChartLegendContent } from "~/components/ui/chart"
+```
+
+<Step>Add the components to your chart.</Step>
+
+```tsx showLineNumbers {15-17}
+<>
+  <ChartContainer config={chartConfig} data={chartData} class="min-h-[200px] w-full">
+    <Axis axis="y" position="left" tickCount={5}>
+      <AxisGrid />
+    </Axis>
+    <Axis axis="x" dataKey="month" position="bottom">
+      <AxisLabel format={(value) => String(value).slice(0, 3)} />
+      <ChartTooltip>
+        {({ data }) => <ChartTooltipContent data={data} labelKey="month" />}
+      </ChartTooltip>
+    </Axis>
+    <Bar dataKey="desktop" fill="var(--color-desktop)" rx="4" ry="4" />
+    <Bar dataKey="mobile" fill="var(--color-mobile)" rx="4" ry="4" />
+  </ChartContainer>
+  <ChartLegend>
+    <ChartLegendContent config={chartConfig} />
+  </ChartLegend>
+</>
+```
+
+<ComponentPreview name="chart-example-legend" previewClassName="h-96" />
+
+</Steps>
+
+Done. You've built your first chart! What's next?
+
+- [Themes and Colors](#theming)
+- [Tooltip](#tooltip)
+- [Legend](#legend)
+
+## Chart Config
+
+The chart config is where you define the labels, icons and colors for a chart.
+
+It is intentionally decoupled from chart data.
+
+This allows you to share config and color tokens between charts. It can also work independently for cases where your data or color tokens live remotely or in a different format.
+
+```tsx showLineNumbers /ChartConfig/
+import { MonitorIcon } from "lucide-solid"
+
+import { type ChartConfig } from "~/components/ui/chart"
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    icon: MonitorIcon,
+    // A color like 'hsl(220, 98%, 61%)' or 'var(--color-name)'
+    color: "#2563eb"
+  },
+  mobile: {
+    label: "Mobile",
+    // Or a theme object with 'light' and 'dark' keys
+    theme: {
+      light: "#60a5fa",
+      dark: "#2563eb"
+    }
+  }
+} satisfies ChartConfig
+```
+
+## Theming
+
+Charts have built-in support for theming. You can use css variables (recommended) or color values in any color format, such as hex, hsl or oklch.
+
+### CSS Variables
+
+<Steps class="mb-0 pt-2">
+
+<Step>Define your colors in your css file</Step>
+
+```css title="src/styles/globals.css" showLineNumbers
+@layer base {
+  :root {
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+  }
+
+  .dark {
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+  }
+}
+```
+
+<Step>Add the color to your `chartConfig`</Step>
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "var(--chart-1)"
+  },
+  mobile: {
+    label: "Mobile",
+    color: "var(--chart-2)"
+  }
+} satisfies ChartConfig
+```
+
+</Steps>
+
+### hex, hsl or oklch
+
+You can also define your colors directly in the chart config. Use the color format you prefer.
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "#2563eb"
+  },
+  mobile: {
+    label: "Mobile",
+    color: "hsl(220, 98%, 61%)"
+  },
+  tablet: {
+    label: "Tablet",
+    color: "oklch(0.5 0.2 240)"
+  },
+  laptop: {
+    label: "Laptop",
+    color: "var(--chart-2)"
+  }
+} satisfies ChartConfig
+```
+
+### Using Colors
+
+To use the theme colors in your chart, reference the colors using the format `var(--color-KEY)`.
+
+#### Components
+
+```tsx
+<Bar dataKey="desktop" fill="var(--color-desktop)" />
+```
+
+#### Chart Data
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartData = [
+  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" }
+]
+```
+
+#### Tailwind
+
+```tsx title="components/example-chart.tsx"
+<AxisLabel class="fill-(--color-desktop)" />
+```
+
+## Tooltip
+
+A chart tooltip contains a label, name, indicator and value. You can use a combination of these to customize your tooltip.
+
+<ComponentPreview name="chart-tooltip" hideCode />
+
+You can turn on or off any of these using the `hideLabel` and `hideIndicator` props and customize the indicator style using the `indicator` prop.
+
+Use `labelKey` and `nameKey` to use a custom key for the tooltip label and name.
+
+Chart comes with the `<ChartTooltip>` and `<ChartTooltipContent>` components. In Solid, render `ChartTooltipContent` inside `ChartTooltip` so you can pass it the active datum.
+
+```tsx title="components/example-chart.tsx"
+import { ChartTooltip, ChartTooltipContent } from "~/components/ui/chart"
+```
+
+```tsx title="components/example-chart.tsx"
+<ChartTooltip>{({ data }) => <ChartTooltipContent data={data} />}</ChartTooltip>
+```
+
+### Props
+
+Use the following props to customize the tooltip.
+
+| Prop            | Type                     | Description                                  |
+| :-------------- | :----------------------- | :------------------------------------------- |
+| `labelKey`      | `string`                 | The config or data key to use for the label. |
+| `nameKey`       | `string`                 | The config or data key to use for the name.  |
+| `indicator`     | `dot` `line` or `dashed` | The indicator style for the tooltip.         |
+| `hideLabel`     | `boolean`                | Whether to hide the label.                   |
+| `hideIndicator` | `boolean`                | Whether to hide the indicator.               |
+
+### Colors
+
+Colors are automatically referenced from the chart config.
+
+### Custom
+
+To use a custom key for tooltip labels and names, use the `labelKey` and `nameKey` props.
+
+```tsx showLineNumbers /browser/
+const chartData = [
+  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" }
+]
+
+const chartConfig = {
+  visitors: {
+    label: "Total Visitors"
+  },
+  chrome: {
+    label: "Chrome",
+    color: "var(--chart-1)"
+  },
+  safari: {
+    label: "Safari",
+    color: "var(--chart-2)"
+  }
+} satisfies ChartConfig
+```
+
+```tsx title="components/example-chart.tsx"
+<ChartTooltip>
+  {({ data }) => <ChartTooltipContent data={data} labelKey="visitors" nameKey="browser" />}
+</ChartTooltip>
+```
+
+This will use `Total Visitors` for the tooltip label and `Chrome` and `Safari` for the tooltip names.
+
+## Legend
+
+You can use the custom `<ChartLegend>` and `<ChartLegendContent>` components to add a legend to your chart.
+
+```tsx title="components/example-chart.tsx"
+import { ChartLegend, ChartLegendContent } from "~/components/ui/chart"
+```
+
+```tsx title="components/example-chart.tsx"
+<ChartLegend>
+  <ChartLegendContent config={chartConfig} />
+</ChartLegend>
+```
+
+When `ChartLegendContent` is rendered outside `ChartContainer`, pass `config` explicitly. If you use `nameKey` and need it to infer entries from your dataset, pass `data` too.
+
+### Colors
+
+Colors are automatically referenced from the chart config.
+
+### Custom
+
+To use a custom key for legend names, use the `nameKey` prop.
+
+```tsx showLineNumbers /browser/
+const chartData = [
+  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" }
+]
+
+const chartConfig = {
+  chrome: {
+    label: "Chrome",
+    color: "var(--chart-1)"
+  },
+  safari: {
+    label: "Safari",
+    color: "var(--chart-2)"
+  }
+} satisfies ChartConfig
+```
+
+```tsx title="components/example-chart.tsx"
+<ChartLegend>
+  <ChartLegendContent config={chartConfig} data={chartData} nameKey="browser" />
+</ChartLegend>
+```
+
+This will use `Chrome` and `Safari` for the legend names.

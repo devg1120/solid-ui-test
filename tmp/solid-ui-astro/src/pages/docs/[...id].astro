@@ -1,0 +1,218 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content"
+
+import DocsCopyPage from "~/components/docs-copy-page"
+import DocsToc from "~/components/docs-toc.astro"
+import { mdxComponents } from "~/components/mdx-components"
+import DocsLayout from "~/layouts/docs-layout.astro"
+import RootLayout from "~/layouts/root-layout.astro"
+import {
+  getComponentNeighbors,
+  getNeighbors,
+  getSidebarData,
+  toDocsPath,
+  toRouteId
+} from "~/lib/docs"
+import { readMdx } from "~/lib/transformers/mdx"
+
+export async function getStaticPaths() {
+  const pages = await getCollection("docs")
+
+  return pages.map((page) => ({
+    params: { id: toRouteId(page.id) || undefined },
+    props: { page }
+  }))
+}
+
+const toLink = (page: CollectionEntry<"docs"> | null) =>
+  page && {
+    href: toDocsPath(toRouteId(page.id)),
+    title: page.data.title
+  }
+
+const { page } = Astro.props
+const id = toRouteId(page.id)
+const isComponent = page.data.component
+
+const [{ Content, headings }, sidebar, nav, compNav, source] = await Promise.all([
+  render(page),
+  getSidebarData(),
+  getNeighbors(id).then(({ previous, next }) => ({
+    prev: toLink(previous),
+    next: toLink(next)
+  })),
+  isComponent
+    ? getComponentNeighbors(id).then(({ previous, next }) => ({
+        prev: toLink(previous),
+        next: toLink(next)
+      }))
+    : Promise.resolve({ prev: null, next: null }),
+  readMdx(page.id)
+])
+---
+
+<RootLayout title={page.data.title}>
+  <DocsLayout sidebar={sidebar} pathname={Astro.url.pathname}>
+    <div
+      data-slot="docs"
+      class="flex scroll-mt-24 items-stretch pb-8 text-[1.05rem] sm:text-[15px] xl:w-full"
+    >
+      <div class="flex min-w-0 flex-1 flex-col">
+        <div class="h-(--top-spacing) shrink-0"></div>
+        <article
+          class="mx-auto flex w-full max-w-[40rem] min-w-0 flex-1 flex-col gap-6 px-4 py-6 md:px-0 lg:py-8"
+        >
+          <header class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between md:items-start">
+                <h1 class="scroll-m-24 text-3xl font-semibold tracking-tight sm:text-3xl">
+                  {page.data.title}
+                </h1>
+
+                <div class="docs-nav flex items-center gap-2">
+                  <div class="hidden sm:block">
+                    <DocsCopyPage
+                      client:only="solid-js"
+                      content={source}
+                      markdownHref={`/docs/${id || "index"}.md`}
+                    />
+                  </div>
+                  <div class="ml-auto flex gap-2">
+                    {
+                      nav.prev && (
+                        <a
+                          href={nav.prev.href}
+                          data-slot="button"
+                          class="group/button cn-button cn-button-variant-secondary cn-button-size-icon extend-touch-target inline-flex size-8 shrink-0 items-center justify-center whitespace-nowrap shadow-none transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 md:size-7 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M5 12h14" />
+                            <path d="M5 12l6 6" />
+                            <path d="M5 12l6-6" />
+                          </svg>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      )
+                    }
+
+                    {
+                      nav.next && (
+                        <a
+                          href={nav.next.href}
+                          data-slot="button"
+                          class="group/button cn-button cn-button-variant-secondary cn-button-size-icon extend-touch-target inline-flex size-8 shrink-0 items-center justify-center whitespace-nowrap shadow-none transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 md:size-7 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+                        >
+                          <span class="sr-only">Next</span>
+                          <svg
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M5 12h14" />
+                            <path d="M13 18l6-6" />
+                            <path d="M13 6l6 6" />
+                          </svg>
+                        </a>
+                      )
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <p
+                class="text-[1.05rem] text-muted-foreground sm:text-base sm:text-balance md:max-w-[80%]"
+              >
+                {page.data.description}
+              </p>
+            </div>
+          </header>
+
+          <div class="w-full flex-1 pb-16 *:first:mt-0 sm:pb-0">
+            <Content components={mdxComponents} />
+          </div>
+
+          {
+            isComponent && (compNav.prev || compNav.next) && (
+              <footer class="flex h-16 w-full items-center gap-2 sm:px-0">
+                {compNav.prev && (
+                  <a
+                    href={compNav.prev.href}
+                    data-slot="button"
+                    class="group/button cn-button cn-button-variant-secondary inline-flex h-8 shrink-0 items-center justify-center gap-1.5 px-2.5 text-sm whitespace-nowrap shadow-none transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="M5 12l6 6" />
+                      <path d="M5 12l6-6" />
+                    </svg>
+                    {compNav.prev.title}
+                  </a>
+                )}
+
+                {compNav.next && (
+                  <a
+                    href={compNav.next.href}
+                    data-slot="button"
+                    class="group/button cn-button cn-button-variant-secondary ml-auto inline-flex h-8 shrink-0 items-center justify-center gap-1.5 px-2.5 text-sm whitespace-nowrap shadow-none transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+                  >
+                    {compNav.next.title}
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="M13 18l6-6" />
+                      <path d="M13 6l6 6" />
+                    </svg>
+                  </a>
+                )}
+              </footer>
+            )
+          }
+        </article>
+      </div>
+
+      <div
+        class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[90svh] w-(--sidebar-width) flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex"
+      >
+        <div class="h-(--top-spacing) shrink-0"></div>
+        {
+          headings.length > 0 && (
+            <div class="no-scrollbar flex flex-col gap-8 overflow-y-auto px-8 pt-8">
+              <DocsToc items={headings} />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </DocsLayout>
+</RootLayout>

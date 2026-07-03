@@ -1,0 +1,12 @@
+dist
+.astro
+node_modules
+.references
+
+# Lockfiles
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+npm-shrinkwrap.json
+bun.lock
+bun.lockb

@@ -1,0 +1,114 @@
+---
+import "~/styles/globals.css"
+
+import SiteFooter from "~/components/site-footer.astro"
+import SiteHeader from "~/components/site-header.astro"
+import SiteToaster from "~/components/site-toaster"
+import { DARK_THEME, LIGHT_THEME, STORAGE_KEYS, THEME_DARK_CLASS } from "~/hooks/use-design-system"
+import { DEFAULT_ICON_LIBRARY, DEFAULT_STYLE_NAME, STYLE_CLASS_PREFIX } from "~/lib/design-system"
+import { iconLibraries } from "~/registry/icon-libraries"
+import { STYLES } from "~/registry/styles"
+
+type Props = {
+  title?: string
+  showHeader?: boolean
+  showFooter?: boolean
+  showToaster?: boolean
+}
+
+const { title = "Astro", showHeader = true, showFooter = true, showToaster = true } = Astro.props
+const styleNames = STYLES.map((entry) => entry.name)
+const iconLibraryNames = Object.keys(iconLibraries)
+---
+
+<html
+  lang="en"
+  class={`layout-fixed ${STYLE_CLASS_PREFIX}${DEFAULT_STYLE_NAME}`}
+  data-icon-library={DEFAULT_ICON_LIBRARY}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="/favicon.ico" rel="shortcut icon" />
+    <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+    <meta content="SolidUI" name="apple-mobile-web-app-title" />
+    <link href="/site.webmanifest" rel="manifest" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script
+      is:inline
+      define:vars={{
+        DEFAULT_STYLE_NAME,
+        DEFAULT_ICON_LIBRARY,
+        STYLE_CLASS_PREFIX,
+        LIGHT_THEME,
+        DARK_THEME,
+        THEME_DARK_CLASS,
+        STORAGE_KEYS,
+        styleNames,
+        iconLibraryNames
+      }}
+    >
+      ;(() => {
+        const root = document.documentElement
+        const validStyles = new Set(styleNames)
+        const validIconLibraries = new Set(iconLibraryNames)
+        const validThemes = new Set([LIGHT_THEME, DARK_THEME])
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+
+        let storedStyle = null
+        let storedIconLibrary = null
+        let storedTheme = null
+
+        try {
+          storedStyle = window.localStorage.getItem(STORAGE_KEYS.style)
+          storedIconLibrary = window.localStorage.getItem(STORAGE_KEYS.iconLibrary)
+          storedTheme = window.localStorage.getItem(STORAGE_KEYS.theme)
+        } catch {
+          // don't do anything
+        }
+
+        const resolvedStyle =
+          storedStyle && validStyles.has(storedStyle) ? storedStyle : DEFAULT_STYLE_NAME
+        const resolvedIconLibrary =
+          storedIconLibrary && validIconLibraries.has(storedIconLibrary)
+            ? storedIconLibrary
+            : DEFAULT_ICON_LIBRARY
+        const resolvedTheme =
+          storedTheme && validThemes.has(storedTheme)
+            ? storedTheme
+            : mediaQuery.matches
+              ? DARK_THEME
+              : LIGHT_THEME
+
+        for (const className of [...root.classList]) {
+          if (className.startsWith(STYLE_CLASS_PREFIX)) {
+            root.classList.remove(className)
+          }
+        }
+
+        root.classList.toggle(THEME_DARK_CLASS, resolvedTheme === DARK_THEME)
+
+        root.classList.add(`${STYLE_CLASS_PREFIX}${resolvedStyle}`)
+        root.dataset.iconLibrary = resolvedIconLibrary
+      })()
+    </script>
+  </head>
+  <body
+    class="group/body min-h-svh bg-background text-foreground [--footer-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]"
+    style="--header-height:3.5rem;"
+  >
+    <div
+      class="relative flex min-h-svh flex-col has-[[data-slot=designer]]:h-svh has-[[data-slot=designer]]:overflow-hidden"
+    >
+      {showHeader && <SiteHeader />}
+      <main class="flex min-h-0 flex-1 flex-col">
+        <slot />
+      </main>
+      {showFooter && <SiteFooter />}
+    </div>
+    {showToaster && <SiteToaster client:only="solid-js" />}
+  </body>
+</html>

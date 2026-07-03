@@ -1,0 +1,96 @@
+---
+title: Date Picker
+description: Build date picker patterns with Popover and Calendar, including ranges, inputs, and natural language parsing.
+component: true
+---
+
+<ComponentPreview name="date-picker-demo" previewClassName="h-80" />
+
+## Installation
+
+The Date Picker is built using a composition of the `Popover` and `Calendar` components.
+
+See the installation instructions for the [Popover](/docs/components/popover#installation) and the [Calendar](/docs/components/calendar#installation) components.
+
+## Usage
+
+```tsx showLineNumbers title="components/example-date-picker.tsx"
+import { format } from "date-fns"
+import { createSignal, Show } from "solid-js"
+
+import { Button } from "~/components/ui/button"
+import { Calendar } from "~/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
+
+export function ExampleDatePicker() {
+  const [date, setDate] = createSignal<Date | null>(null)
+
+  return (
+    <Popover placement="bottom-start">
+      <PopoverTrigger as={Button} variant="outline" class="w-56 justify-start font-normal">
+        <Show when={date()} fallback={<span>Pick a date</span>} keyed>
+          {(value) => format(value, "PPP")}
+        </Show>
+      </PopoverTrigger>
+      <PopoverContent class="w-auto p-0">
+        <Calendar mode="single" value={date()} onValueChange={setDate} />
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+## Composition
+
+A date picker is built from `Popover` and `Calendar`.
+
+```text
+Popover
+├── PopoverTrigger
+└── PopoverContent
+    └── Calendar
+```
+
+There is no `DatePicker` root component.
+
+## Examples
+
+### Basic
+
+A basic date picker component.
+
+<ComponentPreview name="date-picker-basic" previewClassName="h-80" />
+
+### Range Picker
+
+A date picker component for selecting a range of dates.
+
+<ComponentPreview name="date-picker-range" previewClassName="h-[32rem] md:h-[22rem]" />
+
+### Date of Birth
+
+A date picker component for selecting a date of birth. This example uses the calendar's month and year dropdowns.
+
+<ComponentPreview name="date-picker-dob" previewClassName="h-80" />
+
+### Input
+
+A date picker component with an input field for selecting a date.
+
+<ComponentPreview name="date-picker-input" previewClassName="h-80" />
+
+### Time Picker
+
+A date picker component with a time input field for selecting a time.
+
+<ComponentPreview name="date-picker-time" previewClassName="h-80" />
+
+### Natural Language Picker
+
+This example uses `chrono-node` to parse text like `tomorrow` or `in 2 days`.
+
+```bash
+npm install chrono-node
+```
+
+<ComponentPreview name="date-picker-natural-language" previewClassName="h-96" />

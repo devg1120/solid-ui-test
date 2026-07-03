@@ -1,0 +1,31 @@
+---
+import { CopyButton } from "~/components/copy-button"
+import { getIconForLanguageExtension } from "~/components/icons"
+
+type Props = {
+  code: string
+  highlightedCode: string
+  lang: string
+  title?: string
+}
+
+const { code, highlightedCode, lang, title } = Astro.props
+const LanguageIcon = getIconForLanguageExtension(lang)
+---
+
+<figure data-rehype-pretty-code-figure class="relative [&>pre]:max-h-96">
+  {
+    title && (
+      <figcaption
+        data-rehype-pretty-code-title=""
+        data-language={lang}
+        class="flex items-center gap-2 text-foreground [&_svg]:size-4 [&_svg]:opacity-70"
+      >
+        <LanguageIcon />
+        {title}
+      </figcaption>
+    )
+  }
+  <CopyButton client:load value={code} />
+  <div set:html={highlightedCode} />
+</figure>

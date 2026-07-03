@@ -1,0 +1,30 @@
+---
+title: github-actions-solid-ui
+titleTemplate: easy to deploy documents markdown to github pages.
+layout: home
+
+hero:
+  text: github-actions-solid-ui fort github pages generator with solid-ui.
+  actions:
+    - text: Docs
+      link: ./docs
+    - theme: alt
+      text: GitHub
+      link: https://github.com/nikescar/jekyll-theme-solidbase
+  image:
+    src: https://nikescar.github.io/jekyll-theme-solidbase/resources/logo.png
+
+features:
+  - 
+    title: Github Workflow Action
+    details: Deploy with github workflow easily.
+  - 
+    title: Jekyll Remote Theme
+    details: Deploy with _config.yml jekyll integration.
+  - 
+    title: Easy Configurations
+    details: Just edit _config.yml and index.md and deploy.
+
+---
+
+jekyll-theme-solidbase is made with [solid-ui](https://www.solid-ui.com/) and based on [solidbase-ui-docs](https://www.solid-ui.com/docs/introduction)

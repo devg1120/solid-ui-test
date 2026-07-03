@@ -1,0 +1,177 @@
+---
+title: Input OTP
+description: Accessible one-time password component with copy paste functionality.
+component: true
+---
+
+<ComponentPreview name="input-otp-demo" />
+
+## About
+
+`InputOTP` is built on top of Corvu&apos;s OTP Field primitive and provides a shadcn-style API for grouped slots,
+custom separators, and controlled input state.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add input-otp
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @corvu/otp-field
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="input-otp" title="components/ui/input-otp.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/components/ui/input-otp"
+```
+
+```tsx showLineNumbers
+<InputOTP maxLength={6}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+  </InputOTPGroup>
+  <InputOTPSeparator />
+  <InputOTPGroup>
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+## Composition
+
+Use the following composition to build an `InputOTP`:
+
+```text
+InputOTP
+├── InputOTPGroup
+│   ├── InputOTPSlot
+│   ├── InputOTPSlot
+│   └── InputOTPSlot
+├── InputOTPSeparator
+└── InputOTPGroup
+    ├── InputOTPSlot
+    ├── InputOTPSlot
+    └── InputOTPSlot
+```
+
+## Pattern
+
+Use the `pattern` prop to restrict accepted characters.
+
+```tsx showLineNumbers
+const REGEXP_ONLY_DIGITS_AND_CHARS = "^[a-zA-Z0-9]*$"
+
+<InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+<ComponentPreview name="input-otp-pattern" />
+
+## Examples
+
+### Separator
+
+Use `InputOTPSeparator` to split slots into readable groups.
+
+<ComponentPreview name="input-otp-separator" />
+
+### Disabled
+
+Set `disabled` to prevent user interaction.
+
+<ComponentPreview name="input-otp-disabled" />
+
+### Controlled
+
+Use `value` and `onValueChange` to control the OTP value.
+
+<ComponentPreview name="input-otp-controlled" />
+
+### Invalid
+
+Use `aria-invalid` on `InputOTPSlot` to show invalid styling.
+
+<ComponentPreview name="input-otp-invalid" />
+
+### Four Digits
+
+Common pattern for PIN input using `maxLength={4}`.
+
+<ComponentPreview name="input-otp-four-digits" />
+
+### Alphanumeric
+
+Accept both letters and numbers with a custom `pattern`.
+
+<ComponentPreview name="input-otp-alphanumeric" />
+
+### Form
+
+<ComponentPreview name="input-otp-form" previewClassName="h-[30rem]" />
+
+## API Reference
+
+### Core Parts
+
+| Part                | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `InputOTP`          | Root OTP field wrapper and hidden input binding. |
+| `InputOTPGroup`     | Group container for one or more OTP slots.       |
+| `InputOTPSlot`      | Individual visual slot mapped to an index.       |
+| `InputOTPSeparator` | Visual separator between slot groups.            |
+
+### InputOTP
+
+| Prop            | Type                      | Default |
+| --------------- | ------------------------- | ------- |
+| `maxLength`     | `number`                  | -       |
+| `pattern`       | `string \| null`          | -       |
+| `value`         | `string`                  | -       |
+| `onValueChange` | `(value: string) => void` | -       |
+| `disabled`      | `boolean`                 | `false` |
+| `required`      | `boolean`                 | `false` |
+
+See the [Corvu](https://corvu.dev/docs/primitives/otp-field) documentation for more information.

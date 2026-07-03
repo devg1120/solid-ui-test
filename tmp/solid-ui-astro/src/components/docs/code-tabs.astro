@@ -1,0 +1,110 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+const INSTALLATION_METHODS = ["cli", "manual"] as const
+const DEFAULT_INSTALLATION_METHOD = "cli"
+
+type Props = HTMLAttributes<"div">
+
+const { class: className, ...props } = Astro.props
+---
+
+<div
+  class={cn("relative mt-6 flex w-full flex-col gap-2 *:data-[slot=tabs-list]:gap-6", className)}
+  data-slot="code-tabs"
+  {...props}
+>
+  <slot />
+</div>
+<script
+  is:inline
+  define:vars={{
+    DEFAULT_INSTALLATION_METHOD,
+    INSTALLATION_METHODS
+  }}
+>
+  ;(() => {
+    const root = document.currentScript?.previousElementSibling
+
+    if (!(root instanceof HTMLElement)) {
+      return
+    }
+
+    const getScopedElements = (selector) => {
+      return [...root.querySelectorAll(selector)].filter(
+        (element) => element.closest('[data-slot="code-tabs"]') === root
+      )
+    }
+
+    const triggers = getScopedElements('[data-slot="tabs-trigger"]')
+    const contents = getScopedElements('[data-slot="tabs-content"]')
+
+    if (!triggers.length || !contents.length) {
+      return
+    }
+
+    const values = Array.from(
+      new Set(
+        [...triggers, ...contents]
+          .map((element) => element.dataset.value)
+          .filter((value) => typeof value === "string")
+      )
+    )
+
+    if (!values.length) {
+      return
+    }
+
+    const allowedInstallationMethods = new Set(INSTALLATION_METHODS)
+    const installationValues = values.filter((value) => allowedInstallationMethods.has(value))
+    const availableValues = installationValues.length > 0 ? installationValues : values
+
+    const fallbackValue = availableValues.includes(DEFAULT_INSTALLATION_METHOD)
+      ? DEFAULT_INSTALLATION_METHOD
+      : availableValues[0]
+    const initialValue = fallbackValue
+
+    if (!initialValue) {
+      return
+    }
+
+    const setValue = (value) => {
+      root.dataset.value = value
+
+      for (const trigger of triggers) {
+        const isActive = trigger.dataset.value === value
+        trigger.dataset.state = isActive ? "active" : "inactive"
+        trigger.setAttribute("aria-selected", String(isActive))
+        trigger.tabIndex = isActive ? 0 : -1
+      }
+
+      for (const content of contents) {
+        const isActive = content.dataset.value === value
+        content.dataset.state = isActive ? "active" : "inactive"
+
+        if (isActive) {
+          content.removeAttribute("hidden")
+          continue
+        }
+
+        content.setAttribute("hidden", "")
+      }
+    }
+
+    setValue(initialValue)
+
+    for (const trigger of triggers) {
+      trigger.addEventListener("click", () => {
+        const nextValue = trigger.dataset.value
+
+        if (!nextValue || !availableValues.includes(nextValue)) {
+          return
+        }
+
+        setValue(nextValue)
+      })
+    }
+  })()
+</script>

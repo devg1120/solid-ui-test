@@ -1,0 +1,31 @@
+---
+import { ComponentPreviewRenderer } from "~/components/component-preview-renderer"
+import RootLayout from "~/layouts/root-layout.astro"
+import { Index } from "~/registry/__index__"
+
+export function getStaticPaths() {
+  return Object.values(Index)
+    .filter((item) =>
+      ["registry:block", "registry:component", "registry:example"].includes(String(item.type))
+    )
+    .map((item) => ({
+      params: { name: item.name }
+    }))
+}
+
+const { name } = Astro.params
+const item = name ? Index[name] : undefined
+const isPreviewableType = ["registry:block", "registry:component", "registry:example"].includes(
+  String(item?.type)
+)
+
+if (!name || !item || !isPreviewableType) {
+  throw new Error(`Unknown preview route: ${name ?? ""}`)
+}
+---
+
+<RootLayout showHeader={false} showFooter={false} showToaster={false} title={`${name} Preview`}>
+  <div class="min-h-svh bg-background *:data-[slot=card]:has-[[data-slot=chart]]:shadow-none">
+    <ComponentPreviewRenderer client:only="solid-js" name={name} />
+  </div>
+</RootLayout>

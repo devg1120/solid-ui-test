@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from "astro/types"
+import { InfoIcon, TriangleAlertIcon } from "lucide-solid"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  title?: unknown
+  showIcon?: boolean
+  variant?: "default" | "info" | "warning"
+}
+
+const { class: className, title, showIcon = false, variant = "default", ...props } = Astro.props
+
+const hasIconSlot = Astro.slots.has("icon")
+const shouldShowDefaultIcon = showIcon && !hasIconSlot
+const hasIcon = hasIconSlot || shouldShowDefaultIcon
+const hasTitle = Boolean(title)
+
+const defaultIconByVariant = {
+  default: InfoIcon,
+  info: InfoIcon,
+  warning: TriangleAlertIcon
+}
+
+const DefaultIcon = defaultIconByVariant[variant]
+
+const variantClass = "border-surface bg-surface text-surface-foreground"
+---
+
+<div
+  class={cn(
+    "mt-6 grid w-auto items-start gap-y-1 rounded-xl border px-4 py-3 text-sm [&_code]:border",
+    hasIcon ? "grid-cols-[auto_minmax(0,1fr)]" : "grid-cols-1",
+    variantClass,
+    className
+  )}
+  data-variant={variant}
+  {...props}
+>
+  {
+    hasIcon && (
+      <div
+        class={cn(
+          "col-start-1 mr-3 text-current [&_svg]:size-4 [&_svg]:translate-y-0.5",
+          hasTitle ? "row-span-2" : "row-span-1"
+        )}
+      >
+        {hasIconSlot ? <slot name="icon" /> : shouldShowDefaultIcon && <DefaultIcon />}
+      </div>
+    )
+  }
+
+  {
+    title && (
+      <div
+        class={cn(
+          "col-start-1 min-h-4 min-w-0 font-medium tracking-tight",
+          hasIcon && "col-start-2"
+        )}
+      >
+        {title}
+      </div>
+    )
+  }
+
+  <div
+    class={cn(
+      "col-start-1 grid min-w-0 gap-1 text-sm [&_p]:leading-relaxed",
+      hasIcon && "col-start-2",
+      "text-card-foreground/80"
+    )}
+  >
+    <slot />
+  </div>
+</div>

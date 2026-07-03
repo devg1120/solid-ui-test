@@ -1,0 +1,109 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { ComponentPreviewRenderer } from "~/components/component-preview-renderer"
+import ComponentPreviewTabs from "~/components/component-preview-tabs.astro"
+import ComponentSource from "~/components/component-source.astro"
+import { Index } from "~/registry/__index__"
+
+type Props = HTMLAttributes<"div"> & {
+  name: string
+  styleName?: string
+  previewClassName?: string
+  align?: "center" | "start" | "end"
+  hideCode?: boolean
+  type?: "block" | "component" | "example"
+  chromeLessOnMobile?: boolean
+}
+
+const {
+  name,
+  styleName,
+  previewClassName,
+  type,
+  align = "center",
+  hideCode = false,
+  chromeLessOnMobile = false,
+  class: className,
+  ...props
+} = Astro.props
+
+const item = Index[name]
+const blockPreviewClassName = previewClassName ?? "aspect-[4/2.5] min-h-[24rem]"
+const blockPreviewHref = `/view/${encodeURIComponent(name)}`
+
+const isPreviewableType = item
+  ? ["registry:block", "registry:component", "registry:example"].includes(item.type)
+  : false
+---
+
+{
+  !item ? (
+    <p class="mt-6 text-sm text-muted-foreground">
+      Component{" "}
+      <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">
+        {name}
+      </code>{" "}
+      not found in registry.
+    </p>
+  ) : !isPreviewableType ? (
+    <p class="mt-6 text-sm text-muted-foreground">
+      Component{" "}
+      <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">
+        {name}
+      </code>{" "}
+      cannot be previewed directly. Use a registry demo/example entry instead.
+    </p>
+  ) : (
+    <>
+      {type === "block" && (
+        <div
+          class:list={[
+            "relative mt-4 w-full overflow-hidden rounded-xl border bg-background md:-mx-1",
+            blockPreviewClassName,
+            className
+          ]}
+        >
+          <iframe
+            class="size-full border-0 bg-background md:hidden"
+            loading="lazy"
+            src={blockPreviewHref}
+            title={`${name} preview`}
+          />
+          <div class="absolute inset-0 hidden w-[1600px] bg-background md:block">
+            <iframe
+              class="size-full border-0 bg-background"
+              loading="lazy"
+              src={blockPreviewHref}
+              title={`${name} preview`}
+            />
+          </div>
+        </div>
+      )}
+      {type !== "block" && (
+        <ComponentPreviewTabs
+          class={className}
+          previewClassName={previewClassName}
+          align={align}
+          hideCode={hideCode}
+          chromeLessOnMobile={chromeLessOnMobile}
+          {...props}
+        >
+          <ComponentPreviewRenderer slot="component" name={name} client:only="solid-js" />
+          {!hideCode && (
+            <ComponentSource slot="source" name={name} collapsible={false} styleName={styleName} />
+          )}
+          {!hideCode && (
+            <ComponentSource
+              slot="source-preview"
+              name={name}
+              collapsible={false}
+              styleName={styleName}
+              maxLines={3}
+            />
+          )}
+        </ComponentPreviewTabs>
+      )}
+    </>
+  )
+}

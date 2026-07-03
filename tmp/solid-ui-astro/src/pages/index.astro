@@ -1,0 +1,48 @@
+---
+import RootComponents from "~/components/home/root-components"
+import RootLayout from "~/layouts/root-layout.astro"
+---
+
+<RootLayout title="The Foundation for your Design System">
+  <div class="flex flex-1 flex-col">
+    <section class="border-grid">
+      <div class="container-wrapper">
+        <div class="container flex flex-col items-center gap-2 px-6 py-8 text-center md:py-16 lg:py-20 xl:gap-4">
+          <h1 class="leading-tighter max-w-4xl text-3xl font-semibold tracking-tight text-balance text-primary lg:leading-[1.1] lg:font-semibold xl:text-5xl xl:tracking-tighter">
+            The Foundation for your Design System
+          </h1>
+          <p class="max-w-4xl text-base text-balance text-foreground sm:text-lg">
+            A set of beautifully designed components that you can customize, extend, and build on.
+            Start here then make it your own. Open Source. Open Code.
+          </p>
+          <div class="flex w-full items-center justify-center gap-2 pt-2 **:data-[slot=button]:shadow-none">
+            <a
+              class="group/button cn-button cn-button-variant-default cn-button-size-sm inline-flex h-[31px] shrink-0 items-center justify-center rounded-lg whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+              href="/create"
+            >
+              New Project
+            </a>
+            <a
+              class="group/button cn-button cn-button-variant-ghost cn-button-size-sm inline-flex shrink-0 items-center justify-center rounded-lg whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+              href="/docs/components"
+            >
+              View Components
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-wrapper flex-1 pb-6">
+      <div class="container overflow-hidden">
+        <section class="-mx-4 w-[160vw] overflow-hidden rounded-lg border border-border/50 md:hidden md:w-[150vw]">
+          <img alt="Dashboard" class="block dark:hidden" loading="eager" src="/images/dashboard-01-light.png" />
+          <img alt="Dashboard" class="hidden dark:block" loading="eager" src="/images/dashboard-01-dark.png" />
+        </section>
+        <section class="hidden theme-container md:block">
+          <RootComponents client:only="solid-js" />
+        </section>
+      </div>
+    </div>
+  </div>
+</RootLayout>

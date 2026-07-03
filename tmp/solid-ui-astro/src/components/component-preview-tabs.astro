@@ -1,0 +1,112 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  previewClassName?: string
+  align?: "center" | "start" | "end"
+  hideCode?: boolean
+  chromeLessOnMobile?: boolean
+}
+
+const {
+  class: className,
+  previewClassName,
+  align = "center",
+  hideCode = false,
+  chromeLessOnMobile = false,
+  ...props
+} = Astro.props
+---
+
+<div
+  data-slot="component-preview"
+  class={cn("group relative mt-4 mb-12 flex flex-col overflow-hidden rounded-xl border", className)}
+  {...props}
+>
+  <div data-slot="preview">
+    <div
+      data-align={align}
+      data-chromeless={chromeLessOnMobile}
+      class={cn(
+        "preview relative flex h-72 w-full justify-center p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start data-[chromeless=true]:h-auto data-[chromeless=true]:p-0",
+        previewClassName
+      )}
+    >
+      <slot name="component" />
+    </div>
+  </div>
+  {
+    !hideCode && (
+      <div
+        data-slot="code"
+        data-mobile-code-visible="false"
+        class="relative overflow-hidden **:data-[slot=copy-button]:right-4 **:data-[slot=copy-button]:hidden data-[mobile-code-visible=true]:**:data-[slot=copy-button]:flex [&_[data-rehype-pretty-code-figure]]:m-0! [&_[data-rehype-pretty-code-figure]]:rounded-t-none [&_[data-rehype-pretty-code-figure]]:border-t [&_pre]:max-h-72"
+      >
+        <div data-slot="code-preview" class="relative">
+          <slot name="source-preview">
+            <slot name="source" />
+          </slot>
+          <div class="absolute inset-0 flex items-center justify-center pb-4">
+            <div
+              class="absolute inset-0"
+              style="background: linear-gradient(to top, var(--color-code), color-mix(in oklab, var(--color-code) 60%, transparent), transparent);"
+            />
+            <button
+              type="button"
+              data-slot="view-code-button"
+              class="relative z-10 inline-flex h-8 items-center justify-center rounded-lg border border-input bg-background px-3 text-sm font-medium text-foreground shadow-none transition-colors hover:bg-muted focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring"
+            >
+              View Code
+            </button>
+          </div>
+        </div>
+        <div data-slot="code-full" hidden>
+          <slot name="source" />
+        </div>
+      </div>
+    )
+  }
+</div>
+<script is:inline>
+  ;(() => {
+    const root = document.currentScript?.previousElementSibling
+
+    if (!(root instanceof HTMLElement)) {
+      return
+    }
+
+    const getScopedElements = (selector) => {
+      return [...root.querySelectorAll(selector)].filter(
+        (element) => element.closest('[data-slot="component-preview"]') === root
+      )
+    }
+
+    const code = getScopedElements('[data-slot="code"]')[0]
+    const preview = getScopedElements('[data-slot="code-preview"]')[0]
+    const full = getScopedElements('[data-slot="code-full"]')[0]
+    const button = getScopedElements('[data-slot="view-code-button"]')[0]
+
+    if (
+      !(code instanceof HTMLElement) ||
+      !(preview instanceof HTMLElement) ||
+      !(full instanceof HTMLElement) ||
+      !(button instanceof HTMLButtonElement)
+    ) {
+      return
+    }
+
+    const setCodeVisibility = (isVisible) => {
+      code.dataset.mobileCodeVisible = isVisible ? "true" : "false"
+      preview.hidden = isVisible
+      full.hidden = !isVisible
+    }
+
+    setCodeVisibility(false)
+
+    button.addEventListener("click", () => {
+      setCodeVisibility(true)
+    })
+  })()
+</script>

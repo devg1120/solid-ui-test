@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"img">
+
+const { class: className, ...props } = Astro.props
+---
+
+<img class={cn("rounded-md", className)} {...props} />

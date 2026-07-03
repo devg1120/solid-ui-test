@@ -1,0 +1,101 @@
+---
+import type { SidebarLink } from "~/lib/docs"
+
+type Props = {
+  topLevel: SidebarLink[]
+  components: SidebarLink[]
+  pathname: string
+}
+
+const { topLevel, components, pathname } = Astro.props
+
+const normalizedPath = pathname.replace(/\/$/, "") || "/"
+
+function isSectionActive(href: string) {
+  if (href === "/docs") {
+    return normalizedPath === "/docs"
+  }
+
+  return normalizedPath === href || normalizedPath.startsWith(`${href}/`)
+}
+---
+
+<nav
+  class="sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] flex-col overscroll-none bg-transparent text-sidebar-foreground [--sidebar-menu-width:--spacing(56)] lg:flex"
+>
+  <div class="h-9"></div>
+  <div
+    class="pointer-events-none absolute top-8 z-10 h-8 w-(--sidebar-menu-width) shrink-0 bg-gradient-to-b from-background via-background/80 to-background/50 blur-xs"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute top-12 right-2 bottom-0 hidden h-full w-px bg-gradient-to-b from-transparent via-border to-transparent lg:flex"
+  >
+  </div>
+  <div
+    class="mx-auto no-scrollbar flex min-h-0 w-(--sidebar-menu-width) flex-1 flex-col gap-2 overflow-auto overflow-x-hidden px-2"
+  >
+    <section class="relative flex w-full min-w-0 flex-col p-2 pt-6">
+      <p
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-muted-foreground"
+      >
+        Sections
+      </p>
+      <div class="w-full text-sm">
+        <ul class="flex w-full min-w-0 flex-col gap-0.5">
+          {
+            topLevel.map((item) => (
+              <li class="group/menu-item relative">
+                <a
+                  href={item.href}
+                  data-active={isSectionActive(item.href)}
+                  class="relative flex h-[30px] w-fit items-center gap-2 overflow-visible rounded-md border border-transparent p-2 text-left text-[0.8rem] font-medium outline-hidden transition-[width,height,padding,color,background-color,border-color] hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring active:bg-accent active:text-accent-foreground data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="pointer-events-none absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent"
+                  />
+                  <span class="relative z-10">{item.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="relative flex w-full min-w-0 flex-col p-2">
+      <p
+        class="flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-muted-foreground"
+      >
+        Components
+      </p>
+      <div class="w-full text-sm">
+        <ul class="flex w-full min-w-0 flex-col gap-0.5">
+          {
+            components.map((item) => (
+              <li class="group/menu-item relative">
+                <a
+                  href={item.href}
+                  data-active={normalizedPath === item.href}
+                  class="relative flex h-[30px] w-fit items-center gap-2 overflow-visible rounded-md border border-transparent p-2 text-left text-[0.8rem] font-medium outline-hidden transition-[width,height,padding,color,background-color,border-color] hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring active:bg-accent active:text-accent-foreground data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="pointer-events-none absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent"
+                  />
+                  <span class="relative z-10">{item.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <div
+      class="sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t from-background via-background/80 to-background/50 blur-xs"
+    >
+    </div>
+  </div>
+</nav>

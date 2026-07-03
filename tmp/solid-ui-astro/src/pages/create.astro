@@ -1,0 +1,11 @@
+---
+import CreatePage from "~/components/create-page"
+import { getCreateNavigationItems } from "~/lib/create/navigation"
+import RootLayout from "~/layouts/root-layout.astro"
+
+const navigationItems = await getCreateNavigationItems()
+---
+
+<RootLayout title="New Project" showFooter={false}>
+  <CreatePage client:only="solid-js" navigationItems={navigationItems} />
+</RootLayout>

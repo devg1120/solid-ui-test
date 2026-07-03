@@ -1,0 +1,152 @@
+---
+title: Calendar
+description: A calendar component for single, multiple, and range date selection.
+component: true
+---
+
+<ComponentPreview name="calendar-demo" previewClassName="h-96" />
+
+## About
+
+The `Calendar` component is built on top of [Corvu Calendar](https://corvu.dev/docs/primitives/calendar).
+
+## Date Picker
+
+You can use the `<Calendar>` component to build a date picker. See the [Date Picker](/docs/components/date-picker) page for more information.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add calendar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @corvu/calendar date-fns
+```
+
+<Step>Add the `Button` and `Select` components to your project.</Step>
+
+The `Calendar` component uses the local `Button` and `Select` primitives for navigation and month/year selection.
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="calendar" title="components/ui/calendar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Calendar } from "~/components/ui/calendar"
+```
+
+```tsx showLineNumbers
+const [date, setDate] = createSignal(new Date(2025, 0, 26))
+
+<Calendar
+  mode="single"
+  value={date()}
+  onValueChange={setDate}
+  defaultMonth={new Date(2025, 0, 26)}
+  class="rounded-lg border"
+/>
+```
+
+## SSR Notes
+
+Corvu defaults `initialMonth` and `initialFocusedDay` from `new Date()`. When rendering on the server, prefer passing an explicit `defaultMonth`, `month`, `defaultValue`, or `value` when you need stable initial output across server and client timezones.
+
+## Examples
+
+### Basic
+
+A basic calendar component. We used `class="rounded-lg border"` to style the calendar.
+
+<ComponentPreview name="calendar-basic" previewClassName="h-96" />
+
+### Range Calendar
+
+Use `mode="range"` to enable range selection.
+
+<ComponentPreview name="calendar-range" previewClassName="h-[36rem] md:h-96" />
+
+### Month and Year Selector
+
+Use `monthYearSelection` to show month and year dropdowns.
+
+<ComponentPreview name="calendar-caption" previewClassName="h-96" />
+
+### Presets
+
+<ComponentPreview name="calendar-presets" previewClassName="h-[650px]" />
+
+### Date and Time
+
+<ComponentPreview name="calendar-time" previewClassName="h-[600px]" />
+
+### Booked Dates
+
+Disable dates and style them differently with `disabled`.
+
+<ComponentPreview name="calendar-booked-dates" previewClassName="h-96" />
+
+### Custom Cell Size
+
+Use `customCell` to render additional content inside each day and adjust `--cell-size` to fit it.
+
+<ComponentPreview name="calendar-custom-days" previewClassName="h-[560px]" />
+
+You can customize the size of calendar cells using the --cell-size CSS variable. You can also make it responsive by using breakpoint-specific values:
+
+```tsx
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  className="rounded-lg border [--cell-size:--spacing(11)] md:[--cell-size:--spacing(12)]"
+/>
+```
+
+Or use fixed values:
+
+```tsx
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  className="rounded-lg border [--cell-size:2.75rem] md:[--cell-size:3rem]"
+/>
+```
+
+### Week Numbers
+
+Use `showWeekNumber` to display ISO week numbers alongside the calendar.
+
+<ComponentPreview name="calendar-week-numbers" previewClassName="h-96" />
+
+## API Reference
+
+See the [Corvu Calendar](https://corvu.dev/docs/primitives/calendar) documentation for lower-level primitive details.

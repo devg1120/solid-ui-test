@@ -1,0 +1,85 @@
+---
+type TocItem = {
+  depth: number
+  slug: string
+  text: string
+}
+
+type Props = {
+  items: TocItem[]
+}
+
+const { items } = Astro.props
+const toc = items.filter((item) => item.depth >= 2 && item.depth <= 4)
+---
+
+{
+  toc.length > 0 && (
+    <nav data-toc-root class="flex flex-col gap-2 p-4 pt-0 text-sm" aria-label="Table of contents">
+      <p class="sticky top-0 h-6 bg-background text-xs font-medium text-muted-foreground">
+        On This Page
+      </p>
+      <ul class="space-y-0.5">
+        {toc.map((item) => (
+          <li>
+            <a
+              href={`#${item.slug}`}
+              data-toc-link
+              data-slug={item.slug}
+              data-depth={item.depth}
+              class="block rounded-md text-[0.8rem] text-muted-foreground no-underline transition-colors hover:text-foreground data-[active=true]:font-medium data-[active=true]:text-foreground data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            >
+              {item.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<script is:inline>
+  const tocRoots = document.querySelectorAll("[data-toc-root]")
+
+  for (const root of tocRoots) {
+    const links = Array.from(root.querySelectorAll("[data-toc-link]"))
+    const headingIds = links
+      .map((link) => link.getAttribute("data-slug"))
+      .filter((slug) => typeof slug === "string" && slug.length > 0)
+
+    if (!headingIds.length) {
+      continue
+    }
+
+    const updateActiveLink = (activeId) => {
+      for (const link of links) {
+        const slug = link.getAttribute("data-slug")
+        link.dataset.active = slug === activeId ? "true" : "false"
+      }
+    }
+
+    let activeId = headingIds[0]
+    updateActiveLink(activeId)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            activeId = entry.target.id
+          }
+        }
+
+        updateActiveLink(activeId)
+      },
+      { rootMargin: "0% 0% -80% 0%" }
+    )
+
+    for (const headingId of headingIds) {
+      const element = document.getElementById(headingId)
+
+      if (element) {
+        observer.observe(element)
+      }
+    }
+  }
+</script>

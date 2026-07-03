@@ -1,0 +1,139 @@
+---
+title: Drawer
+description: A drawer component for React.
+component: true
+---
+
+<ComponentPreview name="drawer-demo" />
+
+## About
+
+Drawer is built on top of [Corvu Drawer](https://corvu.dev/docs/primitives/drawer) by [Jasmin](https://github.com/GiyoMoon).
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add drawer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @corvu/drawer
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="drawer" title="components/ui/drawer.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { Button } from "~/components/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from "~/components/ui/drawer"
+```
+
+```tsx showLineNumbers
+<Drawer>
+  <DrawerTrigger as={Button} variant="outline">
+    Open
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+      <DrawerDescription>This action cannot be undone.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <Button>Submit</Button>
+      <DrawerClose as={Button} variant="outline">
+        Cancel
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+```
+
+## Composition
+
+Use the following composition to build a `Drawer`:
+
+```text
+Drawer
+├── DrawerTrigger
+└── DrawerContent
+    ├── DrawerHeader
+    │   ├── DrawerTitle
+    │   └── DrawerDescription
+    └── DrawerFooter
+        └── DrawerClose
+```
+
+## Examples
+
+### Scrollable Content
+
+Keep actions visible while the content scrolls.
+
+<ComponentPreview name="drawer-scrollable-content" />
+
+### Sides
+
+Use the `side` prop to set where the drawer opens from. Available options are `top`, `right`, `bottom`, and `left`.
+
+<ComponentPreview name="drawer-sides" align="start" />
+
+### Responsive Dialog
+
+You can combine the `Dialog` and `Drawer` components to render a dialog on desktop and a drawer on mobile.
+
+<ComponentPreview name="drawer-dialog" />
+
+## API Reference
+
+### Core Parts
+
+| Part                | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| `Drawer`            | Root component that controls open state and drag behavior.     |
+| `DrawerTrigger`     | Interactive element used to open the drawer.                   |
+| `DrawerContent`     | Sliding panel rendered in a portal.                            |
+| `DrawerOverlay`     | Backdrop element behind the drawer content.                    |
+| `DrawerHeader`      | Layout wrapper for title and description content.              |
+| `DrawerTitle`       | Accessible heading for the drawer panel.                       |
+| `DrawerDescription` | Supporting text that describes the drawer purpose.             |
+| `DrawerFooter`      | Footer container for actions, usually submit and cancel.       |
+| `DrawerClose`       | Interactive element used to close the drawer programmatically. |
+
+See the [Corvu](https://corvu.dev/docs/primitives/drawer) documentation for more information.

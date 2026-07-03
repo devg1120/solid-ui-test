@@ -1,0 +1,54 @@
+---
+import { Icons } from "~/components/icons"
+import { siteConfig } from "~/lib/site"
+
+const FALLBACK_STAR_COUNT = 1455
+
+function formatCount(count: number) {
+  return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toLocaleString()
+}
+---
+
+<a
+  href={siteConfig.github}
+  target="_blank"
+  rel="noreferrer"
+  class="group/button cn-button cn-button-variant-ghost cn-button-size-sm inline-flex h-8 shrink-0 items-center justify-center whitespace-nowrap shadow-none transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+>
+  <Icons.gitHub />
+  <span data-github-stars class="w-fit text-xs text-muted-foreground tabular-nums"
+    >{formatCount(FALLBACK_STAR_COUNT)}</span
+  >
+</a>
+
+<script is:inline define:vars={{ FALLBACK_STAR_COUNT }}>
+  ;(() => {
+    const link = document.currentScript?.previousElementSibling
+
+    if (!(link instanceof HTMLAnchorElement)) {
+      return
+    }
+
+    const starsElement = link.querySelector("[data-github-stars]")
+
+    if (!(starsElement instanceof HTMLElement)) {
+      return
+    }
+
+    const formatCount = (count) =>
+      count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toLocaleString()
+
+    const loadStars = async () => {
+      try {
+        const response = await fetch("https://ungh.cc/repos/stefan-karger/solid-ui")
+        const data = await response.json()
+        const stars = typeof data?.repo?.stars === "number" ? data.repo.stars : FALLBACK_STAR_COUNT
+        starsElement.textContent = formatCount(stars)
+      } catch {
+        starsElement.textContent = formatCount(FALLBACK_STAR_COUNT)
+      }
+    }
+
+    loadStars()
+  })()
+</script>
