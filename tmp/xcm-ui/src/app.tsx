@@ -14,7 +14,9 @@ export default function App() {
         </>
       )}
     >
+    
       <FileRoutes />
+      
     </Router>
   );
 }
