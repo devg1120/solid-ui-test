@@ -22,7 +22,7 @@ const SubmenuItem = (props: SubmenuItemProps) => {
 	const isSelected = createMemo(() => selectedItem() === subItemIndex())
 
 	const itemBaseClass =
-		"user-select-none flex flex-col mb-2 cursor-pointer gap-2 p-1.5 rounded-md text-white hover:bg-selected-background relative"
+		"user-select-none flex flex-col mb-2 cursor-pointer gap-2 p-1.5 rounded-md text-white__ hover:bg-selected-background relative"
 
 	return (
 		<li

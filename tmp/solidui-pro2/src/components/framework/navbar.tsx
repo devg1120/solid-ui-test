@@ -31,7 +31,7 @@ const Navbar = (props: NavbarProps) => {
 			)}
 		>
 			<div class="flex  items-center gap-2">
-				<span class="text-xl font-bold">{t.prject_name()}</span>
+				<span class="text-xl font-bold pl-3">{t.prject_name()}</span>
 			</div>
 			<div class="flex flex-row items-center gap-8">
 				<SearchInput />

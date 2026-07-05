@@ -34,7 +34,7 @@ const Menu = (props: MenuItemProps) => {
 	}
 
 	const itemBaseClass =
-		"flex items-center p-2 mb-2 cursor-pointer gap-2 text-base rounded-md text-white user-select-none hover:bg-selected-background relative"
+		"flex items-center p-2 mb-2 cursor-pointer gap-2 text-base rounded-md text-white__ user-select-none hover:bg-selected-background relative"
 
 	return (
 		<li>

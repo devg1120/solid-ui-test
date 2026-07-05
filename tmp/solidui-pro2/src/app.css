@@ -10,7 +10,8 @@
 		--muted: 240 4.8% 95.9%;
 		--muted-foreground: 240 3.8% 46.1%;
 
-		--selected-background: 240 3.7% 20%; /* 选中状态的背景 */
+		/*--selected-background: 240 3.7% 20%; */
+		--selected-background: 240 3.7% 80%;   /*GS SELECT MENU */
 
 		--popover: 0 0% 100%;
 		--popover-foreground: 240 10% 3.9%;
@@ -49,10 +50,14 @@
 
 		--radius: 0.5rem;
 
-		/* 新增 sidebar 背景色 */
-		--sidebar-background: 240 10% 3.9%; /* 比背景稍亮 */
+		/*
+		--sidebar-background: 240 10% 3.9%; 
 
-		--page-bg: 240 5% 97%;
+		--sidebar-background: 240 10% 70%; 
+                */
+		--sidebar-background: 240 5% 75%;     /*GS SIDEBAR BG */
+		--page-bg: 240 10% 97%;
+		
 	}
 
 	.dark,
@@ -60,7 +65,7 @@
 		--background: 240 10% 3.9%;
 		--foreground: 0 0% 98%;
 
-		--selected-background: 240 3.7% 20%; /* 选中状态的背景 */
+		--selected-background: 240 3.7% 20%; 
 
 		--muted: 240 3.7% 15.9%;
 		--muted-foreground: 240 5% 64.9%;
@@ -102,11 +107,11 @@
 
 		--radius: 0.5rem;
 
-		/* 新增 sidebar 背景色 */
-		--sidebar-background: 240 10% 3.9%; /* 比背景稍亮 */
+		--sidebar-background: 240 10% 3.9%; 
 
 		--page-bg: 240 10% 7%;
 	}
+
 }
 
 

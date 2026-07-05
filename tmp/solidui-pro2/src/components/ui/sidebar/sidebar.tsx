@@ -160,13 +160,16 @@ export const Sidebar = () => {
 					{/* <img src="/logo.png" alt="logo" class="w-8 h-8" /> */}
 					<Show when={!isCollapsed() || true}>
 						<SiBoxysvg />
-						<span class="text-white text-lg">XXXXXX</span>
+						<span class="text-white__ text-lg">XXXXXX</span>
 					</Show>
 
 					<Button
 						onClick={toggleCollapse}
 						size="icon"
-						class="transition-transform duration-300 bg-transparent dark:hover:bg-transparent"
+						//class="transition-transform duration-300 bg-transparent dark:hover:bg-transparent"
+						//class="transition-transform  bg-transparent text-foreground "
+						class="transition-transform duration-300 text-forground bg-transparent dark:hover:bg-transparent hover:bg-transparent"
+					        //style={{"background-color":"gray"}}
 					>
 						<Dynamic
 							component={
@@ -174,7 +177,7 @@ export const Sidebar = () => {
 									? BsLayoutSidebarReverse
 									: BsLayoutSidebar
 							}
-							class="text-white"
+							class="text-white__"
 						/>
 					</Button>
 				</div>
@@ -190,7 +193,9 @@ export const Sidebar = () => {
 				<Button
 					onClick={toggleCollapse}
 					size="icon"
-					class="fixed bottom-4 left-4 z-50  rounded-full  hover:bg-opacity-80 transition-colors"
+					//class="fixed bottom-4 left-4 z-50  rounded-full  hover:bg-opacity-80 transition-colors"
+					class="fixed top-4 left-2 z-50  rounded-full  "
+					style={{"background-color":"gray"}}
 				>
 					<AiOutlineMenu size={24} />
 				</Button>
