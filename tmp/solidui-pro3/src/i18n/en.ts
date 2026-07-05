@@ -35,6 +35,7 @@ export const en = {
 		change_password: "Change password",
 		color_mode_light: "Light",
 		color_mode_dark: "Dark",
+		color_mode_blue: "Blue",  
 		color_mode_system: "System",
 	},
 	actions: {

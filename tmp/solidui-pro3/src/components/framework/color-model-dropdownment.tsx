@@ -2,6 +2,9 @@ import { useColorMode } from "@kobalte/core/color-mode"
 import { DropdownMenu } from "@kobalte/core/dropdown-menu"
 import { VsColorMode } from "solid-icons/vs"
 import { BsSunFill, BsMoonFill } from "solid-icons/bs"
+import { Bs1Circle } from 'solid-icons/bs'   //GS
+
+
 import { HiSolidComputerDesktop } from "solid-icons/hi"
 import { useLocale } from "~/i18n/lib"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
@@ -10,6 +13,10 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+
+/*
+solid icons   https://solid-icons.vercel.app/
+*/
 
 const ColorModeDropdownmenu = () => {
 	const { t } = useLocale()
@@ -22,6 +29,8 @@ const ColorModeDropdownmenu = () => {
 				return <BsMoonFill size={20} />
 			case "light":
 				return <BsSunFill size={20} />
+			case "blue":
+				return <Bs1Circle size={20} />
 			default:
 				// return <VscSymbolColor size={20} />
 				return <HiSolidComputerDesktop size={20} />
@@ -40,6 +49,12 @@ const ColorModeDropdownmenu = () => {
 					<BsSunFill class="mr-2" size={16} />
 					{t.setting.color_mode_light()}
 				</DropdownMenuItem>
+				
+				<DropdownMenuItem onSelect={() => setColorMode("blue")}>  
+					<Bs1Circle class="mr-2" size={16} />
+					{t.setting.color_mode_blue()}
+				</DropdownMenuItem>
+				
 				<DropdownMenuItem onSelect={() => setColorMode("system")}>
 					<HiSolidComputerDesktop class="mr-2" size={16} />
 					{t.setting.color_mode_system()}
