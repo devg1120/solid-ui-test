@@ -1,7 +1,7 @@
 
 # DashBoard-
 
-![D](11.png)
+![D](_img/11.png)
 
 # ecg-web
 
