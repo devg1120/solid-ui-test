@@ -23,7 +23,7 @@ const App: Component = (props) => {
 
 	return (
 	<>
-	   <pre  style = {{ height: "200px", "overflow-y": "scroll"}}>
+	   <pre  class="code-view" style = {{  "overflow-y": "scroll"}}>
             <code ref={ref_} class="typescript">
               {props.code}
             </code>

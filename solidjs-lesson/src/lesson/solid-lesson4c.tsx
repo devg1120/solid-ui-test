@@ -1,0 +1,193 @@
+import type { Component } from 'solid-js';
+import {createSignal,onMount, Index } from 'solid-js';
+import {createStore,produce } from 'solid-js/store';
+
+import Table from "./table";
+import CodeView from "./code_view";
+
+
+let code = `
+import type { Component } from 'solid-js';
+import {createSignal,onMount, Index } from 'solid-js';
+import {createStore,produce } from 'solid-js/store';
+
+const App =()=>{
+    //変数定義
+	const [item, setItem] = createSignal('');
+	const [upditem, setupdItem] = createSignal('');
+    const [bind ,setBind] = createStore([]); //ストアの使用（データリストの更新）
+    const	ary_data = [
+        {id: 1,name: "モスクワ"},
+        {id: 2,name: "サンクトペテルブルク"},
+        {id: 3,name: "エカテリンブルク"},
+        {id: 4,name: "ムンバイ"},
+        {id: 5,name: "ベンガルール"},
+        {id: 6,name: "コルカタ"},
+        {id: 7,name: "サンパウロ"},
+        {id: 8,name: "リオデジャネイロ"},
+        {id: 9,name: "ブラジリア"},
+		];
+    //新規作成用のメソッド
+	const ins = ()=>{
+		setBind(
+			produce((bind)=>
+				bind.push({
+					id:bind.length + 1,
+					name:item(),
+				})
+			)
+		);
+	};
+    //削除用のメソッド
+	const del = (idx)=>{
+			setBind(bind.filter((_, i) => i !== idx)) //削除処理
+	}
+	//修正用のメソッド
+	const upd = (idx,id,name)=>{
+		setBind(
+			produce((bind)=>{
+				bind[idx] = {
+				id :id,
+				name :name,
+				}
+			})
+		)
+	}
+	//onMountを用いると、一回だけ読み込む処理ができる
+    onMount( ()=>{
+		setBind(ary_data) //空オブジェクトに代入
+    });
+    //レンダリング
+    return(
+        <>
+			<label>新規<input type="text"  onChange={ (e)=>{ setItem(e.target.value) } } value={item()}/></label>
+			<button type="button" onClick={ ins }>新規</button>
+			<ul>
+				<Index each={bind}>
+					{(data,idx)=>(
+						<>
+						<li>
+							<dl>
+								<dt><input type="text" onInput={ (e)=>{ setupdItem(e.target.value) } } value={ data().name } /></dt>
+								<dd><button type="button" onClick={ ()=> upd(idx,data.id,upditem())}>修正</button></dd>
+								<dd ><button type="button" onClick={ ()=> del(idx) }>削除</button></dd>
+							</dl>
+						</li>
+						</>
+					)}
+				</Index>
+			</ul>
+        </>
+    );
+}
+export default App;
+
+`;
+
+
+
+const App: Component = () => {
+
+    const [item, setItem] = createSignal('');
+    const [upditem, setupdItem] = createSignal('');
+    const [bind ,setBind] = createStore([]); //ストアの使用（データリストの更新）
+
+        const columns = [ "id", "name", ];
+	const rows = [
+        {id: 1,name: "モスクワ"},
+        {id: 2,name: "サンクトペテルブルク"},
+        {id: 3,name: "エカテリンブルク"},
+        {id: 4,name: "ムンバイ"},
+        {id: 5,name: "ベンガルール"},
+        {id: 6,name: "コルカタ"},
+        {id: 7,name: "サンパウロ"},
+        {id: 8,name: "リオデジャネイロ"},
+        {id: 9,name: "ブラジリア"},
+	];
+
+ //新規作成用のメソッド
+	const ins = ()=>{
+		setBind(
+			produce((bind)=>
+				bind.push({
+					id:bind.length + 1,
+					name:item(),
+				})
+			)
+		);
+	};
+    //削除用のメソッド
+	const del = (idx)=>{
+			setBind(bind.filter((_, i) => i !== idx)) //削除処理
+	}
+	//修正用のメソッド
+	const upd = (idx,id,name)=>{
+		  console.log("upd", idx,id, name);
+		setBind(
+			produce((bind)=>{
+				bind[idx] = {
+				id :id,
+				name :name,
+				}
+			})
+		)
+	}
+
+    //onMountを用いると、一回だけ読み込む処理ができる
+    onMount( ()=>{
+		setBind(rows) //空オブジェクトに代入
+    });
+
+	return (
+	<>
+    	    <div  style={{ "display": "flex"}} >
+    	    <div>
+	        <Table columns={columns} rows={bind} />
+		<br/>
+			<label>新規<input type="text"  onInput={ (e)=>{ setItem(e.target.value) } } value={item()}/></label>
+			<button type="button" onClick={ ins }>新規</button>
+			<ul>
+				<Index each={bind}>
+					{(data,idx)=>(
+						<li style={{ "list-style": "none"}}  >
+							<dl style={{ "display": "flex"}}>
+							        <dt style = {{ "padding-right": "15px" }}>{bind[idx].id}  </dt>
+								<dt><input type="text" onInput={ (e)=>{ setupdItem(e.target.value) } } value={ data().name } /></dt>
+								<dd><button type="button" onClick={ ()=> upd(idx,data().id,upditem())}>修正</button></dd>								
+								<dd ><button type="button" onClick={ ()=> del(idx) }>削除</button></dd>
+							</dl>
+						</li>
+					)}
+				</Index>
+			</ul>
+    	    </div>
+    	    <div  style={{ "width": "300px"}} ></div>
+    	    <div>
+	        <Table columns={columns} rows={bind} />
+		<br/>
+			<label>新規<input type="text"  onInput={ (e)=>{ setItem(e.target.value) } } value={item()}/></label>
+			<button type="button" onClick={ ins }>新規</button>
+			<ul>
+				<Index each={bind}>
+					{(data,idx)=>(
+						<li style={{ "list-style": "none"}}  >
+							<dl style={{ "display": "flex"}}>
+							        <dt style = {{ "padding-right": "15px" }}>{bind[idx].id}  </dt>
+								<dt><input type="text" onInput={ (e)=>{ setupdItem(e.target.value) } } value={ data().name } /></dt>
+								<dd><button type="button" onClick={ ()=> upd(idx,data().id,upditem())}>修正</button></dd>								
+								<dd ><button type="button" onClick={ ()=> del(idx) }>削除</button></dd>
+							</dl>
+						</li>
+					)}
+				</Index>
+			</ul>
+    	    </div>
+    	    </div>
+
+	</>
+	);
+};
+
+export default App;
+
+

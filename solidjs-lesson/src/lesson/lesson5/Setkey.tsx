@@ -1,48 +1,3 @@
-import type { Component } from 'solid-js';
-import {createSignal,createEffect,For } from 'solid-js';
-
-import Calc from "./lesson5/Calc";
-import CodeView from "./code_view";
-
-
-let code_parent = `
-import { createSignal } from "solid-js";
-import Setkey from "./Setkey";
-
-const Calc = ()=>{
-import { createSignal } from "solid-js";
-import Setkey from "./Setkey";
-
-const Calc = ()=>{
-    const [str,setStr] = createSignal("");
-    const [sum,setSum] = createSignal(0);
-	const pushkeys = [
-		[['7','7'],['8','8'],['9','9'],['div','÷']],
-		[['4','4'],['5','5'],['6','6'],['mul','×']],
-		[['1','1'],['2','2'],['3','3'],['sub','-']],
-		[['0','0'],['eq','='],['c','C'],['add','+']],
-	];
-    //子コンポーネントからの値の受取
-    const onReceive = (typed,sum)=>{
-        setStr(str() + typed);
-        setSum(sum);
-    }
-	return (
-			<>
-                <Setkey pushkeys={pushkeys} onEmit={(c,s)=>onReceive(c,s)} />
-				<div>
-					<p>打ち込んだ文字:{str}</p>
-					<p>合計:{sum}</p>
-				</div>
-			</>
-	)
-}
-
-export default Calc;
-
-`;
-
-let code_child = `
 import { For,onMount } from "solid-js";
 import { createStore } from "solid-js/store";
 const Setkey = (props)=>{
@@ -89,7 +44,7 @@ const Setkey = (props)=>{
         setState({lnum,cnum,sign}) //変数の同期用
         onEmit(str,sum); //親コンポーネントへの送出
 	}
-
+		
 	//計算処理
 	const calc = (mode,lnum,cnum)=>{
 		switch(mode){
@@ -113,7 +68,7 @@ const Setkey = (props)=>{
 						{(v,i)=>(
 	                        <button class="square" onClick={()=>{getChar(v[0],v[1])}}>
 		                    {v[1]}
-	                        </button>
+	                        </button>						
 						)}
 					</For>
 				</div>
@@ -124,24 +79,3 @@ const Setkey = (props)=>{
   )
 }
 export default Setkey;
-
-`;
-
-
-
-const App: Component = () => {
-
-	return (
-	<>
-	    <Calc/>
-	    <h3>parent code</h3>
-	    <CodeView code={code_parent}/>
-	    <h3>child code</h3>
-	    <CodeView code={code_child}/>
-	</>
-	);
-};
-
-export default App;
-
-

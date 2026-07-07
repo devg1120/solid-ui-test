@@ -9,6 +9,8 @@ import Lesson2 from './lesson/solid-lesson2'
 import Lesson3 from './lesson/solid-lesson3'
 import Lesson4 from './lesson/solid-lesson4'
 import Lesson4b from './lesson/solid-lesson4b'
+import Lesson4c from './lesson/solid-lesson4c'
+import Lesson5 from './lesson/solid-lesson5'
 
 function App() {
   const [count, setCount] = createSignal(0)
@@ -69,6 +71,21 @@ function App() {
         </div>
 	<Lesson4b/>
       </div>
+
+      <div class="section">
+        <div>
+          <h1>Lesson4c データリスト　createStore,produce使用　複数</h1>
+        </div>
+	<Lesson4c/>
+      </div>
+
+      <div class="section">
+        <div>
+          <h1>Lesson5 コンポネント制御（親・子）</h1>
+        </div>
+	<Lesson5/>
+      </div>
+
 
       <br/>
       <hr/>

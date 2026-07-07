@@ -95,6 +95,11 @@
   }
 }
 
+.code-view {
+   height: 300px;
+
+}
+
 .ticks {
   position: relative;
   width: 100%;
