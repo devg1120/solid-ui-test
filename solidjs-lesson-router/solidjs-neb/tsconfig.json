@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    // General
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "target": "ESNext",
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+
+    // Modules
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+
+    // Type Checking & Safety
+    "strict": true,
+    "types": ["vite/client"],
+
+    // Paths
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@config/*": ["./src/config/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"]
+    }
+  },
+  "include": ["src"]
+}

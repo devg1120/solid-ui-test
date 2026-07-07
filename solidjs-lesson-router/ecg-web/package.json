@@ -1,0 +1,19 @@
+{
+  "name": "ecg-web",
+  "version": "0.1.0",
+  "description": "Web client for ECG Hub",
+  "scripts": {
+    "dev": "vite --host --port 3000",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "vite": "^4.2.1",
+    "vite-plugin-solid": "^2.6.1"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.8.2",
+    "solid-js": "^1.7.0"
+  }
+}

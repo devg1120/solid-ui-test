@@ -1,0 +1,29 @@
+{
+  "name": "neb-website",
+  "version": "1.0.0",
+  "description": "NEB - Get your answers quickly and safely",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.15.3",
+    "path": "^0.12.7",
+    "solid-js": "^1.9.4",
+    "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/bun": "latest",
+    "tailwindcss": "^4.1.18",
+    "terser": "^5.46.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vite-plugin-solid": "^2.11.0"
+  },
+  "module": "src/index.tsx",
+  "private": true
+}
