@@ -37,6 +37,10 @@
 
 ## [8] solidjs-shopping-cart
 
+![](_img/81.png)
+![](_img/82.png)
+![](_img/83.png)
+
 ## [9] void_visualizer
 
 
