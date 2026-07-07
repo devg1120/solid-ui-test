@@ -2,6 +2,7 @@
 ## [1] DashBoard-  
 
 ![](_img/11.png)
+![](_img/12.png)
 
 ## ecg-web
 
