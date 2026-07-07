@@ -26,6 +26,9 @@
 
 ## [6] solid-movie
 
+![](_img/61.png)
+![](_img/62.png)
+
 ## [7] solidjs-neb
 
 ## [8] solidjs-shopping-cart
