@@ -4,6 +4,10 @@
 ![](_img/11.png)
 ![](_img/12.png)
 
+<img src="_img/11.png" width="200">
+<img src="_img/12.png" width="200">
+
+
 # [2] ecg-web
 
 ![](_img/21.png)
